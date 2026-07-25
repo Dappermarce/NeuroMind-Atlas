@@ -1306,7 +1306,7 @@ window.TRANSLATIONS = {
   ". No es un instrumento diagnóstico validado, no sustituye una evaluación psicológica profesional y sus resultados no deben interpretarse como un diagnóstico clínico. Si tienes preocupaciones sobre tu salud mental, consulta a un profesional de la salud mental cualificado.": ". It is not a validated diagnostic instrument, does not replace a professional psychological assessment, and its results should not be interpreted as a clinical diagnosis. If you have concerns about your mental health, consult a qualified mental health professional.",
 
   // ── Footer contact ────────────────────────────────────────────────────────
-  "Contacto: MarceloCK@proton.me": "Contact: MarceloCK@proton.me",
+  "Contacto: Marcelo.CK@outlook.com": "Contact: Marcelo.CK@outlook.com",
 
   // 2026 scientific and accessibility review
   "Saltar al contenido principal": "Skip to main content",
