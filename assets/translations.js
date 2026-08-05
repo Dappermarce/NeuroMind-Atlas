@@ -1365,7 +1365,7 @@ window.TRANSLATIONS = {
   "No todo libro famoso sigue siendo una buena explicación. Esta selección distingue obras históricas, recursos actuales y lecturas para seguir investigando.": "Not every famous book remains a good explanation. This selection distinguishes historical works, current resources, and readings for further investigation.",
   "Herramientas para aprender haciendo. Son actividades educativas, no diagnósticos con botones bonitos.": "Tools for learning by doing. They are educational activities, not diagnoses with pretty buttons.",
   "Un atlas para seguir la evidencia sin perder de vista a la persona.": "An atlas for following the evidence without losing sight of the person.",
-  "Revisión editorial: julio 2026": "Editorial review: July 2026",
+  "Proyecto independiente. Contenido revisado por psicólogos y psiquiatras.": "Independent project. Content reviewed by psychologists and psychiatrists.",
   "Cita sugerida: Kroll, M. C. (2026).": "Suggested citation: Kroll, M. C. (2026).",
   "Código y documentación académica": "Code and academic documentation",
   "La TCC reúne intervenciones con respaldo para distintas condiciones, pero su utilidad depende del problema, la persona, el contexto y la calidad de la aplicación. → Ver": "CBT includes interventions supported for different conditions, but its usefulness depends on the problem, the person, the context, and the quality of implementation. → See",
