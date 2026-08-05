@@ -1,4 +1,4 @@
-# Política editorial de NeuroMind Atlas
+# Criterios de contenido de NeuroMind Atlas
 
 ## Propósito
 
@@ -25,6 +25,8 @@ El atlas explica ciencia con curiosidad, honestidad y lenguaje humano. Empieza p
 - Las opciones de apoyo se describen como información general, nunca como prescripción personal.
 - Las controversias históricas y científicas se presentan como controversias.
 
-## Revisión
+## Revisión profesional y correcciones
 
-La revisión editorial vigente corresponde a julio de 2026. Si una afirmación no se sostiene con evidencia suficiente, se corrige o se retira.
+Este proyecto fue creado y desarrollado de manera independiente por Marcelo C. K. Su contenido contó con la revisión y las observaciones de psicólogos y psiquiatras. La selección de fuentes, la redacción y el mantenimiento del proyecto corresponden al autor.
+
+Si una afirmación queda desactualizada, no cuenta con evidencia suficiente o puede explicarse con mayor claridad, se corrige o se retira.
