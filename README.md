@@ -34,7 +34,7 @@ NeuroMind Atlas fue creado y desarrollado de manera independiente por Marcelo C.
 
 Documentación del proyecto
 
-- `CITATION.cff`: metadatos para citarlo.
+- `CITATION.cff`: información de autoría y citación del proyecto.
 - `CRITERIOS_DE_CONTENIDO.md`: jerarquía de fuentes, voz y límites de las afirmaciones.
 - `CONTRIBUTING.md`: procedimiento para proponer correcciones verificables.
 
