@@ -2,7 +2,7 @@ NeuroMind Atlas
 
 Atlas educativo bilingüe de psicología, psiquiatría y neurociencia para estudiantes, docentes y lectores interesados. Organiza historia, conceptos, clasificaciones clínicas, figuras relevantes y recursos académicos en una experiencia web accesible.
 
-Alcance y criterios editoriales
+Alcance y criterios del contenido
 
 - Distingue hechos establecidos, modelos, hipótesis y contexto histórico.
 - Utiliza DSM-5-TR y CIE-11 como sistemas de clasificación, no como herramientas de autodiagnóstico.
@@ -26,14 +26,16 @@ Desarrollo local
 
 No requiere compilación. Abre `index.html` con un servidor local para conservar el comportamiento de recursos y enlaces.
 
-Revisión
+Autoría y revisión profesional
 
-Última revisión editorial: julio de 2026.
+NeuroMind Atlas fue creado y desarrollado de manera independiente por Marcelo C. K. Su contenido contó con la revisión y las observaciones de psicólogos y psiquiatras.
 
-Documentación académica
+Última revisión: julio de 2026.
+
+Documentación del proyecto
 
 - `CITATION.cff`: metadatos para citarlo.
-- `EDITORIAL_POLICY.md`: jerarquía de fuentes, voz y límites de las afirmaciones.
+- `CRITERIOS_DE_CONTENIDO.md`: jerarquía de fuentes, voz y límites de las afirmaciones.
 - `CONTRIBUTING.md`: procedimiento para proponer correcciones verificables.
 
-La voz del proyecto combina explicación científica, ejemplos cotidianos y una regla editorial sencilla: si algo no se sostiene, se corrige.
+La voz del proyecto combina explicación científica, ejemplos cotidianos y una regla de trabajo sencilla: si algo no se sostiene, se corrige.
