@@ -3902,6 +3902,39 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 .dark-theme .evidence-note { border-color: #7651d6; background: #20182a; color: #cec3d7; }
 .dark-theme .footer { background: #060508; }
 
+/* A recurring authorial thread keeps the atlas personal without turning it into a biography. */
+.author-thread { display: grid; grid-template-columns: 150px minmax(0, 1fr) 64px; gap: clamp(1rem, 3vw, 2.5rem); width: min(1180px, calc(100% - 2rem)); margin: clamp(1.2rem, 4vw, 3rem) auto; padding: clamp(1.3rem, 3vw, 2.2rem); border: 1px solid #d8cde5; border-radius: 22px; background: linear-gradient(135deg, #f4f0f8, #ebe4f2); color: #291f31; }
+.author-thread > span { color: #6c478f; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; }
+.author-thread h2 { max-width: 28ch; font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.8rem, 3.4vw, 3.2rem); font-weight: 500; line-height: 1.02; }
+.author-thread p { max-width: 68ch; margin-top: 0.8rem; color: #65596d; font-size: 0.92rem; line-height: 1.75; }
+.author-thread > i { display: grid; width: 54px; height: 54px; place-items: center; border: 1px solid #aa91c1; border-radius: 50%; color: #684482; font-family: 'Newsreader', serif; font-size: 1.5rem; font-style: normal; }
+.dark-theme .author-thread { border-color: #3a2e45; background: linear-gradient(135deg, #17121d, #100d14); color: #f2ebf6; }
+.dark-theme .author-thread > span { color: #c5a7ec; }
+.dark-theme .author-thread p { color: #c0b5c7; }
+.dark-theme .author-thread > i { border-color: #674f79; color: #d3b9f0; }
+
+/* Complete night-mode readability for inherited legacy content. */
+.dark-theme .section :is(h3, h4, h5),
+.dark-theme .faq-item h4,
+.dark-theme .challenge-item h4 { color: #f4eef7; }
+.dark-theme .section :is(p, li),
+.dark-theme .faq-item p,
+.dark-theme .challenge-item p,
+.dark-theme .methodology-note p,
+.dark-theme .section-references { color: #c4bac9; }
+.dark-theme .section a { color: #cbb2f5; }
+.dark-theme .section small { color: #ada1b5; }
+
+@media (max-width: 780px) {
+    .author-thread { grid-template-columns: 1fr; }
+    .author-thread > i { display: none; }
+}
+
+@media (max-width: 980px) {
+    .dark-theme .nav-menu { border-color: #302839 !important; background: rgba(12, 9, 15, 0.98) !important; }
+    .dark-theme .nav-preview { border-color: #33283e; background: #100d14; }
+}
+
 @media (max-width: 1180px) {
     .brand-copy small { display: none; }
     .search-container { display: none; }

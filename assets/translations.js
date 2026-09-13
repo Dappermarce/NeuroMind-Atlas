@@ -977,7 +977,7 @@ window.TRANSLATIONS = {
   "Buscar en línea": "Search online",
   "Pensar Rápido, Pensar Despacio": "Thinking, Fast and Slow",
   "Daniel Kahneman": "Daniel Kahneman",
-  "Exploración fascinante de los dos sistemas de pensamiento que gobiernan nuestras decisiones. Sistema 1 (rápido, intuitivo) y Sistema 2 (lento, deliberativo). Premio Nobel de Economía.": "A fascinating exploration of the two thinking systems that govern our decisions. System 1 (fast, intuitive) and System 2 (slow, deliberate). Nobel Prize in Economics.",
+  "Presenta la distinción entre procesos rápidos e intuitivos y procesos más lentos y deliberados. Es una obra influyente; también conviene leerla junto con replicaciones y revisiones posteriores.": "Introduces the distinction between fast, intuitive processes and slower, more deliberate ones. It is an influential work that should also be read alongside later replications and reviews.",
   "Testimonio autobiográfico de sobreviviente del Holocausto y fundamento de la logoterapia. Más de 16 millones de copias vendidas. Un libro sobre la búsqueda de significado como fuerza de supervivencia.": "An autobiographical account by a Holocaust survivor and the foundation of logotherapy. More than 16 million copies sold. A book about the search for meaning as a driving force for survival.",
   "Daniel Goleman": "Daniel Goleman",
   "Obra que popularizó el concepto de inteligencia emocional y su rol en el éxito personal y profesional. Ha transformado el mundo de los negocios y la educación.": "A work that popularized the concept of emotional intelligence and its role in personal and professional success. It has transformed the worlds of business and education.",
@@ -1482,5 +1482,17 @@ window.TRANSLATIONS = {
   "Un promedio describe un grupo; no cuenta, por sí solo, la historia de una persona.": "An average describes a group; on its own, it does not tell one person's story.",
   "Una idea puede ser importante para la historia de la psicología sin tener el mismo respaldo en la investigación actual.": "An idea can matter to the history of psychology without having the same support in current research.",
   "Antes de compartir una cifra, pregunta: ¿de qué año es, a quiénes incluye y cómo se obtuvo?": "Before sharing a figure, ask: what year is it from, who does it include, and how was it obtained?",
-  "Una clasificación organiza información clínica. No sustituye una evaluación profesional ni define a una persona.": "A classification organizes clinical information. It does not replace a professional assessment or define a person."
+  "Una clasificación organiza información clínica. No sustituye una evaluación profesional ni define a una persona.": "A classification organizes clinical information. It does not replace a professional assessment or define a person.",
+  "Hilo del autor 01": "Author's thread 01",
+  "Hilo del autor 02": "Author's thread 02",
+  "Hilo del autor 03": "Author's thread 03",
+  "Hilo del autor · 01": "Author's thread · 01",
+  "Hilo del autor · 02": "Author's thread · 02",
+  "Hilo del autor · 03": "Author's thread · 03",
+  "Una línea de tiempo ordena fechas; el pasado nunca fue tan ordenado.": "A timeline orders dates; the past was never so orderly.",
+  "Las escuelas no esperaron su turno. Coexistieron, discutieron y a veces nombraron el mismo problema de maneras incompatibles. La secuencia ayuda a orientarse; los límites impiden convertirla en una marcha inevitable hacia la verdad.": "Schools did not wait for their turn. They coexisted, disagreed and sometimes named the same problem in incompatible ways. Sequence helps us find our way; limits keep it from becoming an inevitable march toward truth.",
+  "Nombrar algo puede ayudar. Creer que el nombre lo explica todo, bastante menos.": "Naming something can help. Believing the name explains everything helps considerably less.",
+  "Una categoría organiza patrones y puede orientar decisiones profesionales. No resume cómo llegó una persona hasta allí, qué contexto la rodea ni qué necesita. Por eso este atlas presenta criterios, ejemplos y límites en la misma página.": "A category organizes patterns and may guide professional decisions. It does not summarize how a person arrived there, the context around them or what they need. That is why this atlas places criteria, examples and limits on the same page.",
+  "Leer una fuente no es coleccionar autoridad.": "Reading a source is not collecting authority.",
+  "Es mirar qué preguntó, con quién trabajó, cómo midió y qué no puede concluir. Una cita puede respaldar una frase; comprenderla exige seguir el recorrido completo. La curiosidad empieza donde termina el resumen.": "It means looking at what was asked, who was studied, how it was measured and what cannot be concluded. A citation may support one sentence; understanding it requires following the entire route. Curiosity begins where the summary ends."
 };
