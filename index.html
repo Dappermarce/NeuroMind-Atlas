@@ -8,11 +8,11 @@
     <meta name="author" content="Marcelo C. K.">
     <meta name="keywords" content="psicología, psiquiatría, salud mental, terapia, neurociencia, desarrollo personal, trastornos mentales, historia de la psicología">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#172554">
+    <meta name="theme-color" content="#09070d">
     <meta name="citation_title" content="NeuroMind Atlas: Psicología, psiquiatría y neurociencia">
     <meta name="citation_author" content="Marcelo C. K.">
     <meta name="citation_publication_date" content="2026">
-    <meta name="citation_online_date" content="2026/07/15">
+    <meta name="citation_online_date" content="2026/09/13">
     <link rel="canonical" href="https://neuromindatlas.vercel.app/">
     <!-- Open Graph -->
     <meta property="og:title" content="NeuroMind Atlas | Psicología y salud mental">
@@ -23,9 +23,16 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NeuroMind Atlas | Psicología y salud mental">
     <meta name="twitter:description" content="Atlas educativo bilingüe de psicología, psiquiatría y neurociencia.">
-    <link rel="stylesheet" href="styles.css?v=20260718-1">
+    <link rel="stylesheet" href="styles.css?v=20260913-1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark-theme');
+      })();
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,30 +52,52 @@
     <header class="header" id="header">
         <nav class="nav">
             <div class="nav-container">
-                <div class="nav-logo">
-                    <i class="fas fa-brain"></i>
-                    <span>NeuroMind Atlas</span>
-                </div>
+                <a class="nav-logo" href="#inicio" aria-label="NeuroMind Atlas — Inicio">
+                    <span class="brand-mark" aria-hidden="true"><i class="fas fa-brain"></i></span>
+                    <span class="brand-copy"><strong>NeuroMind</strong><small>Atlas de la mente</small></span>
+                </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="#historia" class="nav-link">Historia</a></li>
-                    <li><a href="#ramas" class="nav-link">Ramas</a></li>
-                    <li><a href="#latinoamerica" class="nav-link">Latinoamérica</a></li>
-                    <li><a href="#psiquiatria" class="nav-link">Psiquiatría</a></li>
-                    <li><a href="#psicologos" class="nav-link">Pioneros</a></li>
-                    <li><a href="#conceptos" class="nav-link">Conceptos</a></li>
-                    <li><a href="#trastornos" class="nav-link">Trastornos</a></li>
-                    <li><a href="#libros" class="nav-link">Libros</a></li>
-                    <li><a href="#interactivo" class="nav-link">Interactivo</a></li>
-                    <li><a href="#contacto" class="nav-link">Recursos</a></li>
+                    <li class="nav-cluster">
+                        <a href="#indice" class="nav-link" data-sections="inicio nota-del-autor indice">Mapa del atlas <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <div class="nav-preview nav-preview-featured">
+                            <div class="nav-preview-intro"><span class="nav-kicker">Empieza aquí</span><strong>No necesitas leerlo en orden.</strong><p>Elige una pregunta y sigue sus conexiones sin perder el contexto.</p><img src="assets/brain.svg" alt="" aria-hidden="true"></div>
+                            <div class="nav-preview-links"><a href="#indice"><span>Índice de temas</span><small>Cuatro rutas para orientarte</small></a><a href="#nota-del-autor"><span>Cómo está construido</span><small>Evidencia, duda y persona</small></a></div>
+                        </div>
+                    </li>
+                    <li class="nav-cluster">
+                        <a href="#historia" class="nav-link" data-sections="historia ramas latinoamerica psicologos">Fundamentos <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <div class="nav-preview">
+                            <div class="nav-preview-intro"><span class="nav-kicker">Ideas en movimiento</span><strong>La psicología no apareció terminada.</strong><p>Recorre escuelas, rupturas y preguntas que todavía siguen abiertas.</p><img src="assets/mind.svg" alt="" aria-hidden="true"></div>
+                            <div class="nav-preview-links"><a href="#historia"><span>Historia</span><small>Línea de tiempo interactiva</small></a><a href="#ramas"><span>Ramas</span><small>Campos, métodos y aplicaciones</small></a><a href="#latinoamerica"><span>Latinoamérica</span><small>Un mapa necesariamente incompleto</small></a><a href="#psicologos"><span>Pioneros</span><small>Aportes y límites</small></a></div>
+                        </div>
+                    </li>
+                    <li class="nav-cluster">
+                        <a href="#psiquiatria" class="nav-link" data-sections="psiquiatria conceptos trastornos">Mente y clínica <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <div class="nav-preview">
+                            <div class="nav-preview-intro"><span class="nav-kicker">Clasificar sin reducir</span><strong>Una etiqueta orienta; no resume a una persona.</strong><p>Aquí separo sistemas, evidencia y decisiones clínicas.</p><img src="assets/therapy.svg" alt="" aria-hidden="true"></div>
+                            <div class="nav-preview-links"><a href="#psiquiatria"><span>Psiquiatría</span><small>Encuentros y diferencias</small></a><a href="#conceptos"><span>Conceptos</span><small>Definiciones conectadas</small></a><a href="#trastornos"><span>Categorización</span><small>DSM-5-TR, CIE-11 y límites</small></a></div>
+                        </div>
+                    </li>
+                    <li class="nav-cluster">
+                        <a href="#libros" class="nav-link" data-sections="libros contacto">Biblioteca <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <div class="nav-preview">
+                            <div class="nav-preview-intro"><span class="nav-kicker">Leer con criterio</span><strong>Fama no equivale a evidencia.</strong><p>Cada recomendación explica por qué entra y cómo conviene leerla.</p><i class="fas fa-book-open nav-illustration-icon" aria-hidden="true"></i></div>
+                            <div class="nav-preview-links"><a href="#libros"><span>Libros</span><small>Guías de lectura al abrir cada ficha</small></a><a href="#contacto"><span>Fuentes y recursos</span><small>Instituciones, revistas y cursos</small></a></div>
+                        </div>
+                    </li>
+                    <li class="nav-cluster">
+                        <a href="#interactivo" class="nav-link" data-sections="interactivo">Laboratorio <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <div class="nav-preview">
+                            <div class="nav-preview-intro"><span class="nav-kicker">Aprender haciendo</span><strong>Interacción sin disfrazarla de diagnóstico.</strong><p>Explora relaciones y comprueba qué cambia cuando cambia una variable.</p><i class="fas fa-wave-square nav-illustration-icon" aria-hidden="true"></i></div>
+                            <div class="nav-preview-links"><a href="#interactivo"><span>Herramientas</span><small>Actividades educativas</small></a><a href="#historia"><span>Reproducir historia</span><small>Avanza hito por hito</small></a></div>
+                        </div>
+                    </li>
                 </ul>
-                <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Cambiar a inglés" title="Cambiar a inglés">
-                    <i class="fas fa-globe"></i>
-                    <span class="lang-toggle-text">EN</span>
-                </button>
-                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema"><i class="fas fa-moon"></i></button>
+                    <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Cambiar a inglés" title="Cambiar a inglés"><i class="fas fa-globe"></i><span class="lang-toggle-text">EN</span></button>
+                    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu"><i class="fas fa-bars"></i></button>
+                </div>
             </div>
         </nav>
     </header>
@@ -119,8 +148,9 @@
         <div class="sabias-que-banner">
             <div class="container">
                 <div class="sabias-que-inner">
-                    <span class="sabias-tag"><i class="fas fa-lightbulb"></i> ¿Sabías que...?</span>
-                    <span class="sabias-text" id="sabias-text">Un metaanálisis mundial estimó que el 62,5 % de las personas con un trastorno mental había presentado su inicio antes de los 25 años (Solmi et al., 2022).</span>
+                    <span class="sabias-tag"><i class="fas fa-lightbulb"></i> Antes de concluir</span>
+                    <span class="sabias-text" id="sabias-text" aria-live="polite">Que dos cosas cambien juntas no demuestra que una cause la otra. La correlación es una pista, no el final de la investigación.</span>
+                    <button id="sabias-next" type="button">Otra pregunta <span aria-hidden="true">→</span></button>
                 </div>
             </div>
         </div>
@@ -130,7 +160,7 @@
         <div class="container">
             <i class="fas fa-info-circle"></i>
             <strong>Aviso:</strong> Este sitio tiene fines exclusivamente educativos e informativos. No sustituye la consulta con un profesional de salud mental calificado. Ante cualquier síntoma, busca atención profesional.
-            &nbsp;·&nbsp; <em>Última actualización: julio 2026</em>
+            &nbsp;·&nbsp; <em>Última actualización: septiembre 2026</em>
         </div>
     </div>
 
@@ -151,12 +181,37 @@
         </div>
     </section>
 
+    <section class="atlas-index" id="indice" aria-labelledby="atlas-index-title">
+        <div class="container">
+            <div class="atlas-index-heading">
+                <div><p class="index-eyebrow">Índice de temas</p><h2 id="atlas-index-title">Una entrada distinta para cada pregunta</h2></div>
+                <p>No comprimí el atlas para que pareciera más simple. Organicé sus capas para que puedas empezar con una idea breve y profundizar solo cuando la curiosidad lo pida.</p>
+            </div>
+            <div class="atlas-index-grid">
+                <a class="index-card" href="#historia"><span class="index-number">01</span><div><h3>¿De dónde vienen estas ideas?</h3><p>Historia, escuelas, pioneros y el contexto latinoamericano.</p><small>Historia · Ramas · Pioneros</small></div><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <a class="index-card" href="#conceptos"><span class="index-number">02</span><div><h3>¿Cómo funciona la mente?</h3><p>Conceptos conectados con ejemplos, aplicaciones y límites.</p><small>Cognición · Conducta · Neurociencia</small></div><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <a class="index-card" href="#trastornos"><span class="index-number">03</span><div><h3>¿Cómo se clasifica sin simplificar?</h3><p>Qué describen las categorías clínicas y qué nunca pueden decidir por sí solas.</p><small>Psiquiatría · DSM-5-TR · CIE-11</small></div><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <a class="index-card" href="#interactivo"><span class="index-number">04</span><div><h3>¿Cómo sigo investigando?</h3><p>Actividades, lecturas, instituciones y fuentes para no terminar en un resumen.</p><small>Interactivo · Libros · Recursos</small></div><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
     <!-- Historia Section -->
     <section class="section" id="historia">
         <div class="container">
             <h2 class="section-title">Historia de la Psicología</h2>
             <p class="section-subtitle">Más de 2 500 años intentando responder una pregunta que se resiste, con bastante disciplina, a tener una sola respuesta: cómo funciona la mente humana.</p>
             <div class="reading-time"><i class="fas fa-clock"></i> Tiempo estimado de lectura: 8 min</div>
+
+            <div class="timeline-player" aria-label="Reproductor de la historia de la psicología">
+                <div class="timeline-player-copy"><span class="timeline-player-kicker">Recorrido guiado</span><strong id="timeline-now">Antigüedad · Raíces filosóficas</strong><small id="timeline-count">Hito 1 de 10</small></div>
+                <div class="timeline-player-controls">
+                    <button type="button" id="timeline-prev" aria-label="Hito anterior"><i class="fas fa-backward-step"></i></button>
+                    <button type="button" id="timeline-play" class="timeline-play" aria-label="Reproducir cronología" aria-pressed="false"><i class="fas fa-play"></i><span>Reproducir</span></button>
+                    <button type="button" id="timeline-next" aria-label="Hito siguiente"><i class="fas fa-forward-step"></i></button>
+                </div>
+                <div class="timeline-progress" aria-hidden="true"><span id="timeline-progress-bar"></span></div>
+            </div>
 
             <div class="timeline">
 
@@ -182,7 +237,7 @@
                         <h3>Entre la Teología y la Medicina</h3>
                         <p>Durante los muchos siglos de la Edad Media coexistieron explicaciones religiosas, filosóficas y médicas, con diferencias importantes entre regiones. En partes de Europa algunas experiencias se atribuyeron a causas sobrenaturales y hubo prácticas coercitivas; al mismo tiempo sobrevivieron tradiciones médicas y en diversos centros del mundo islámico funcionaron bimaristanes con atención organizada.</p>
                         <ul class="timeline-details">
-                            <li>El <strong>bimaristán de Bagdad</strong> (siglo VIII) es considerado el primer hospital psiquiátrico de la historia.</li>
+                            <li>El <strong>bimaristán de Bagdad</strong> figura entre los antecedentes de atención hospitalaria organizada; describirlo con la categoría moderna de “hospital psiquiátrico” requiere cautela.</li>
                             <li><strong>Tomás de Aquino</strong> integró la psicología aristotélica en la filosofía cristiana.</li>
                             <li>En Europa, los enfermos mentales eran frecuentemente excluidos; algunos eran internados en manicomios con condiciones deplorables.</li>
                         </ul>
@@ -199,7 +254,7 @@
                         <ul class="timeline-details">
                             <li><strong>René Descartes</strong> (1596–1650) formuló el dualismo mente-cuerpo ("Cogito, ergo sum") e identificó la glándula pineal como punto de contacto entre ambos.</li>
                             <li><strong>John Locke</strong> (1632–1704) propuso que la mente es una <em>tabula rasa</em> al nacer, moldeada exclusivamente por la experiencia.</li>
-                            <li><strong>Philippe Pinel</strong> (1745–1826) retiró las cadenas de los pacientes en el Hospital Bicêtre de París, iniciando la reforma humanitaria de la psiquiatría.</li>
+                            <li><strong>Philippe Pinel</strong> (1745–1826) quedó asociado a la reforma moral en Francia. El relato de las cadenas es una imagen histórica discutida: el cambio también involucró a Jean-Baptiste Pussin y fue un proceso colectivo.</li>
                         </ul>
                         <div class="timeline-influence"><i class="fas fa-link"></i> <strong>Influencia actual:</strong> El debate herencia-ambiente ("nature vs nurture") tiene sus raíces directas en la filosofía de Locke.</div>
                     </div>
@@ -210,13 +265,13 @@
                     <div class="timeline-content">
                         <span class="timeline-era">Siglo XIX</span>
                         <h3>Nacimiento de la Psicología Científica</h3>
-                        <p><strong>Wilhelm Wundt</strong> establece el primer laboratorio de psicología experimental en Leipzig, Alemania, en 1879. Este hecho es considerado el acta de nacimiento de la psicología como ciencia independiente de la filosofía.</p>
+                        <p><strong>Wilhelm Wundt</strong> establece en Leipzig, en 1879, uno de los primeros laboratorios dedicados a la psicología experimental. El hito ayudó a consolidar la disciplina, aunque su historia no empieza en una sola fecha ni con una sola persona.</p>
                         <ul class="timeline-details">
                             <li>Wundt utilizó la <strong>introspección experimental</strong> para estudiar la experiencia consciente con métodos controlados.</li>
                             <li>¿Por qué Leipzig? La Universidad era un centro intelectual de primer orden, y Wundt contaba con el apoyo institucional necesario.</li>
                             <li>Su obra "Principios de Psicología Fisiológica" (1874) fue el primer manual universitario de la disciplina.</li>
                         </ul>
-                        <div class="timeline-influence"><i class="fas fa-link"></i> <strong>Influencia actual:</strong> Los métodos experimentales controlados que Wundt estableció siguen siendo el estándar de oro en investigación psicológica.</div>
+                        <div class="timeline-influence"><i class="fas fa-link"></i> <strong>Influencia actual:</strong> El laboratorio de Wundt ayudó a institucionalizar el estudio controlado de procesos psicológicos; la investigación actual combina métodos experimentales, observacionales, cualitativos y cuantitativos.</div>
                     </div>
                 </div>
 
@@ -454,6 +509,10 @@
     </section>
 
     <!-- Ramas Section -->
+    <aside class="author-thread" aria-label="Hilo del autor 01">
+        <span>Hilo del autor · 01</span><div><h2>Una línea de tiempo ordena fechas; el pasado nunca fue tan ordenado.</h2><p>Las escuelas no esperaron su turno. Coexistieron, discutieron y a veces nombraron el mismo problema de maneras incompatibles. La secuencia ayuda a orientarse; los límites impiden convertirla en una marcha inevitable hacia la verdad.</p></div><i aria-hidden="true">M</i>
+    </aside>
+
     <section class="section" id="ramas">
         <div class="container">
             <h2 class="section-title">Ramas, especialidades y campos de aplicación</h2>
@@ -1494,6 +1553,10 @@
     </section>
 
     <!-- Trastornos Mentales Section -->
+    <aside class="author-thread" aria-label="Hilo del autor 02">
+        <span>Hilo del autor · 02</span><div><h2>Nombrar algo puede ayudar. Creer que el nombre lo explica todo, bastante menos.</h2><p>Una categoría organiza patrones y puede orientar decisiones profesionales. No resume cómo llegó una persona hasta allí, qué contexto la rodea ni qué necesita. Por eso este atlas presenta criterios, ejemplos y límites en la misma página.</p></div><i aria-hidden="true">M</i>
+    </aside>
+
     <section class="section" id="trastornos">
         <div class="container">
             <h2 class="section-title">Trastornos Mentales</h2>
@@ -2270,7 +2333,7 @@
                     <div class="book-info">
                         <h3>Pensar Rápido, Pensar Despacio</h3>
                         <p class="book-author">Daniel Kahneman</p>
-                        <p class="book-description">Exploración fascinante de los dos sistemas de pensamiento que gobiernan nuestras decisiones. Sistema 1 (rápido, intuitivo) y Sistema 2 (lento, deliberativo). Premio Nobel de Economía.</p>
+                        <p class="book-description">Presenta la distinción entre procesos rápidos e intuitivos y procesos más lentos y deliberados. Es una obra influyente; también conviene leerla junto con replicaciones y revisiones posteriores.</p>
                         <a href="https://www.google.com/search?q=Pensar+Rápido+Pensar+Despacio+Daniel+Kahneman" target="_blank" rel="noopener noreferrer" class="book-search-link"><i class="fas fa-search"></i> Buscar en línea</a>
                     </div>
                 </div>
@@ -2369,6 +2432,10 @@
     </section>
 
     <!-- Interactive Section (sin juego de memoria) -->
+    <aside class="author-thread" aria-label="Hilo del autor 03">
+        <span>Hilo del autor · 03</span><div><h2>Leer una fuente no es coleccionar autoridad.</h2><p>Es mirar qué preguntó, con quién trabajó, cómo midió y qué no puede concluir. Una cita puede respaldar una frase; comprenderla exige seguir el recorrido completo. La curiosidad empieza donde termina el resumen.</p></div><i aria-hidden="true">M</i>
+    </aside>
+
     <section class="section" id="interactivo">
         <div class="container">
             <h2 class="section-title">Experiencia Interactiva</h2>
@@ -2527,7 +2594,7 @@
                     <li><strong>Diagnósticos:</strong> se describen con apoyo del DSM-5-TR y la CIE-11, que son sistemas distintos y no sustituyen una evaluación profesional individual.</li>
                     <li><strong>Tratamientos:</strong> se presentan como opciones generales documentadas, nunca como indicaciones personales. La elección depende de edad, gravedad, preferencias, antecedentes, disponibilidad y comorbilidades.</li>
                     <li><strong>Niveles de certeza:</strong> el atlas distingue hechos establecidos, resultados probables, debates vigentes, antecedentes históricos y ejemplos ilustrativos.</li>
-                    <li><strong>Actualización:</strong> El contenido se revisa periódicamente. Última revisión: julio 2026.</li>
+                    <li><strong>Actualización:</strong> El contenido se revisa periódicamente. Última revisión: septiembre 2026.</li>
                 </ul>
             </div>
 
@@ -2720,6 +2787,6 @@
 
     <script src="assets/translations.js"></script>
     <script src="assets/i18n.js"></script>
-    <script src="script.js?v=20260718-1"></script>
+    <script src="script.js?v=20260913-1"></script>
 </body>
 </html>
