@@ -3925,6 +3925,59 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 .dark-theme .section a { color: #cbb2f5; }
 .dark-theme .section small { color: #ada1b5; }
 
+/* The biopsychosocial map needs its own night palette because its original
+   white nodes and level colors otherwise collide with inherited light text. */
+.dark-theme .mind-brain-map {
+    border: 1px solid #342943;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(116, 78, 163, 0.18), transparent 48%),
+        linear-gradient(145deg, #17121d, #0f0c13);
+}
+.dark-theme .mind-brain-map h3 { color: #eadcf7; }
+.dark-theme .mbm-node {
+    border: 1px solid #392e45;
+    border-top-width: 4px;
+    background: #1b1621;
+    color: #f3edf6;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+.dark-theme .mbm-level-bio {
+    border: 1px solid rgba(122, 180, 255, 0.42);
+    background: rgba(62, 126, 205, 0.2);
+    color: #b9d9ff;
+}
+.dark-theme .mbm-level-psico {
+    border: 1px solid rgba(124, 205, 137, 0.38);
+    background: rgba(59, 137, 72, 0.2);
+    color: #bce9c3;
+}
+.dark-theme .mbm-level-social {
+    border: 1px solid rgba(255, 169, 104, 0.42);
+    background: rgba(190, 91, 30, 0.2);
+    color: #ffd0ad;
+}
+.dark-theme .mbm-gene,
+.dark-theme .mbm-brain { border-top-color: #73b6ff; }
+.dark-theme .mbm-gene i,
+.dark-theme .mbm-brain i { color: #8bc3ff; }
+.dark-theme .mbm-mental,
+.dark-theme .mbm-emotion { border-top-color: #79c986; }
+.dark-theme .mbm-mental i,
+.dark-theme .mbm-emotion i { color: #8dd899; }
+.dark-theme .mbm-conduct,
+.dark-theme .mbm-env { border-top-color: #ffad70; }
+.dark-theme .mbm-conduct i,
+.dark-theme .mbm-env i { color: #ffc08d; }
+.dark-theme .mbm-node-lateral { background: #181d1a; }
+.dark-theme .mbm-lateral-connector { border-color: #79c986; }
+.dark-theme .mbm-arrow { background: #79c986; }
+.dark-theme .mbm-arrow::after { border-top-color: #79c986; }
+.dark-theme .mbm-arrow.mbm-feedback {
+    background: none;
+    color: #bce9c3;
+}
+.dark-theme .mbm-note { color: #c8bdcf; }
+
 @media (max-width: 780px) {
     .author-thread { grid-template-columns: 1fr; }
     .author-thread > i { display: none; }
