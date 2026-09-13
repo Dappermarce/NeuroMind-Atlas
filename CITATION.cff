@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: "C. K."
     given-names: "Marcelo"
-date-released: 2026-07-15
+date-released: 2026-09-13
 url: "https://neuromindatlas.vercel.app/"
 repository-code: "https://github.com/Dappermarce/NeuroMind-Atlas"
 abstract: "Atlas educativo bilingüe de psicología, psiquiatría, salud mental y neurociencia."
