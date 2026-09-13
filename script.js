@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .nav-preview a');
     const header = document.getElementById('header');
 
     // Toggle mobile menu
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
+            if (link.parentElement?.classList.contains('nav-cluster') && window.matchMedia('(max-width: 980px)').matches) return;
             navMenu.classList.remove('active');
             if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
         });
@@ -35,9 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
+            const groupedSections = (link.dataset.sections || '').split(' ').filter(Boolean);
+            if (link.getAttribute('href') === `#${currentSectionId}` || groupedSections.includes(currentSectionId)) {
                 link.classList.add('active');
             }
         });
@@ -57,8 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
+            if (this.parentElement?.classList.contains('nav-cluster') && window.matchMedia('(max-width: 980px)').matches) return;
             const targetId = this.getAttribute('href');
+            if (!targetId || !targetId.startsWith('#')) return;
+            e.preventDefault();
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
@@ -186,44 +190,93 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     updateHeroParallax();
 
-    // Add book recommendation click handlers
+    const bookReadingGuides = {
+        'Psicología: La Ciencia de la Mente y la Conducta': 'Úsalo como mapa general: compara sus capítulos con las fuentes primarias enlazadas en el atlas.',
+        'Pensar Rápido, Pensar Despacio': 'Léelo junto con replicaciones y revisiones posteriores; varias ideas siguen siendo útiles, pero no todas tienen el mismo apoyo empírico.',
+        'El Hombre en Busca de Sentido': 'Conviene distinguir el testimonio autobiográfico de las afirmaciones clínicas sobre logoterapia.',
+        'Inteligencia Emocional': 'Es una puerta histórica al concepto. Compárala con modelos psicométricos y con definiciones más recientes.',
+        'Fluir (Flow)': 'Busca la diferencia entre la descripción de la experiencia de flujo y las conclusiones causales sobre bienestar.',
+        'DSM-5-TR — Manual Diagnóstico y Estadístico': 'Consúltalo como sistema de clasificación profesional, no como lista para autodiagnosticarse.',
+        'La Interpretación de los Sueños': 'Su valor aquí es histórico. Sus tesis centrales no deben confundirse con el estudio contemporáneo del sueño.',
+        'El Arte de Amar': 'Léelo como ensayo humanista y social, no como manual clínico ni como síntesis de la investigación actual.',
+        'El Proceso de Convertirse en Persona': 'Observa cómo sus ideas sobre la relación terapéutica dialogan con evidencia posterior sobre alianza y empatía.',
+        'Obediencia a la Autoridad': 'Acompáñalo con el análisis ético y metodológico posterior de los experimentos de Milgram.',
+        'Psicología Positiva': 'Contrasta sus propuestas con revisiones actuales y separa los ejercicios prácticos de las afirmaciones generales sobre bienestar.',
+        'El Cerebro que se Cambia a Sí Mismo': 'Úsalo como introducción narrativa a la neuroplasticidad; los casos ilustran posibilidades, pero no sustituyen evidencia clínica comparativa.'
+    };
+
     const bookCards = document.querySelectorAll('.book-card');
     bookCards.forEach(card => {
+        const cardTitle = card.querySelector('h3')?.textContent || '';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Abrir guía de lectura: ${cardTitle}`);
+
         card.addEventListener('click', function(e) {
-            // Don't intercept direct link clicks
             if (e.target.tagName === 'A' || e.target.closest('a')) return;
 
             const bookTitle = this.querySelector('h3').textContent;
             const bookAuthor = this.querySelector('.book-author').textContent;
+            const bookDescription = this.querySelector('.book-description')?.textContent || '';
+            const translate = typeof window.t === 'function' ? window.t : value => value;
+            const readingGuide = Object.entries(bookReadingGuides).find(([title]) => title === bookTitle || translate(title) === bookTitle)?.[1] || 'Lee esta obra atendiendo a su fecha, su propósito y la diferencia entre influencia histórica y evidencia actual.';
 
             const modal = document.createElement('div');
             modal.className = 'book-modal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-labelledby', 'book-dialog-title');
             modal.innerHTML = `
-                <div class="modal-content" style="background:white;padding:2rem;border-radius:15px;text-align:center;max-width:500px;width:90%;">
-                    <h3 style="margin-bottom:0.5rem;color:#333;">${bookTitle}</h3>
-                    <p style="color:#6c5ce7;font-weight:600;margin-bottom:1rem;">${bookAuthor}</p>
-                    <p style="color:#555;margin-bottom:1.5rem;">Te recomendamos buscarlo en librerías locales o plataformas de libros digitales.</p>
-                    <div style="display:flex;gap:1rem;justify-content:center;">
-                        <button class="btn btn-primary search-book-btn">Buscar en línea</button>
-                        <button class="btn btn-secondary close-modal-btn" style="color:#667eea;border-color:#667eea;">Cerrar</button>
+                <div class="modal-content book-guide-dialog">
+                    <button class="book-modal-close close-modal-btn" type="button" aria-label="${translate('Cerrar')}"><i class="fas fa-xmark"></i></button>
+                    <p class="book-guide-eyebrow">${translate('Guía de lectura')}</p>
+                    <h3 id="book-dialog-title">${bookTitle}</h3>
+                    <p class="book-guide-author">${bookAuthor}</p>
+                    <div class="book-guide-grid">
+                        <div><strong>${translate('Por qué está en el atlas')}</strong><p>${bookDescription}</p></div>
+                        <div><strong>${translate('Cómo conviene leerlo')}</strong><p>${translate(readingGuide)}</p></div>
+                    </div>
+                    <p class="book-guide-note">${translate('Recomendación editorial, no afirmación de consenso. La fecha y el tipo de obra importan.')}</p>
+                    <div class="book-guide-actions">
+                        <button class="btn btn-primary search-book-btn">${translate('Buscar una edición')}</button>
+                        <button class="btn btn-secondary close-modal-btn">${translate('Volver al atlas')}</button>
                     </div>
                 </div>
             `;
-            modal.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;`;
             document.body.appendChild(modal);
+            document.body.classList.add('modal-open');
 
+            const closeModal = function() {
+                document.body.classList.remove('modal-open');
+                modal.remove();
+                card.focus();
+            };
             const searchQuery = encodeURIComponent(`${bookTitle} ${bookAuthor} libro`);
             modal.querySelector('.search-book-btn').addEventListener('click', function() {
                 window.open(`https://www.google.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
             });
-            modal.querySelector('.close-modal-btn').addEventListener('click', function() {
-                document.body.removeChild(modal);
+            modal.querySelectorAll('.close-modal-btn').forEach(button => button.addEventListener('click', closeModal));
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) closeModal();
             });
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    document.body.removeChild(modal);
+            modal.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') { event.preventDefault(); closeModal(); }
+                if (event.key === 'Tab') {
+                    const controls = modal.querySelectorAll('button, a[href], [tabindex="0"]');
+                    const first = controls[0];
+                    const last = controls[controls.length - 1];
+                    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
                 }
             });
+            modal.querySelector('.book-modal-close').focus();
+        });
+
+        card.addEventListener('keydown', function(e) {
+            if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) {
+                e.preventDefault();
+                card.click();
+            }
         });
     });
 
@@ -257,6 +310,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeMoodChart();
     initializeSearch();
     initializeThemeToggle();
+    initializeTimelinePlayer();
+    initializeMegaNavigation();
+    initializeSectionIndices();
     initializeSabiasQue();
     
     console.log('Psicología & Psiquiatría – Guía Completa cargada exitosamente! 🧠✨');
@@ -267,32 +323,26 @@ document.addEventListener('DOMContentLoaded', function() {
 // =============================================
 function initializeSabiasQue() {
     const facts = [
-        "Un metaanálisis mundial estimó que el 62,5 % de las personas con un trastorno mental había presentado su inicio antes de los 25 años (Solmi et al., 2022).",
-        "La psicología cognitiva demostró que podemos sostener 7±2 elementos en la memoria de trabajo (Miller, 1956).",
-        "Tomar la misma decisión repetidamente agota nuestra capacidad cognitiva — se llama 'fatiga de decisiones'.",
-        "El cerebro consume el 20% de toda la energía del cuerpo, aunque solo representa el 2% del peso corporal.",
-        "La terapia cognitivo-conductual (TCC) es eficaz para más de 20 trastornos mentales diferentes.",
-        "Pavlov descubrió el condicionamiento clásico mientras estudiaba la digestión en perros, no la psicología.",
-        "La depresión mayor afecta a 280 millones de personas en todo el mundo (OMS, 2022).",
-        "El hipocampo, clave para la memoria, puede generar nuevas neuronas incluso en la adultez.",
-        "El 'efecto placebo' es tan potente que puede producir cambios físicos medibles en el cerebro.",
-        "Los taxistas de Londres tienen más volumen en el hipocampo posterior por su uso intensivo de la navegación espacial.",
+        "Que dos cosas cambien juntas no demuestra que una cause la otra. La correlación es una pista, no el final de la investigación.",
+        "Un promedio describe un grupo; no cuenta, por sí solo, la historia de una persona.",
+        "Una idea puede ser importante para la historia de la psicología sin tener el mismo respaldo en la investigación actual.",
+        "Antes de compartir una cifra, pregunta: ¿de qué año es, a quiénes incluye y cómo se obtuvo?",
+        "Una clasificación organiza información clínica. No sustituye una evaluación profesional ni define a una persona.",
     ];
     const el = document.getElementById('sabias-text');
     if (!el) return;
 
     let current = 0;
-    setInterval(() => {
+    const translate = value => typeof window.t === 'function' ? window.t(value) : value;
+    const nextButton = document.getElementById('sabias-next');
+    const render = () => { el.textContent = translate(facts[current]); };
+    // Manual progression gives readers as much time as they need.
+    nextButton?.addEventListener('click', () => {
         current = (current + 1) % facts.length;
-        el.style.opacity = '0';
-        setTimeout(() => {
-            el.textContent = facts[current];
-            el.style.opacity = '1';
-        }, 400);
-    }, 7000);
-
-    // Fade transition style
-    el.style.transition = 'opacity 0.4s ease';
+        render();
+    });
+    document.addEventListener('languagechange', render);
+    render();
 }
 
 // =============================================
@@ -961,7 +1011,8 @@ function initializeSearch() {
         <input type="text" id="search-input" placeholder="Buscar en el sitio..." aria-label="Buscar" />
         <div class="search-results" id="search-results"></div>
     `;
-    header.appendChild(searchContainer);
+    const actions = header.querySelector('.nav-actions');
+    header.insertBefore(searchContainer, actions || null);
     
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
@@ -1034,31 +1085,209 @@ function initializeSearch() {
 // Theme toggle functionality
 // =============================================
 function initializeThemeToggle() {
-    const themeToggle = document.createElement('button');
-    themeToggle.id = 'theme-toggle';
-    themeToggle.className = 'theme-toggle';
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    themeToggle.title = 'Cambiar tema';
-    themeToggle.setAttribute('aria-label', 'Cambiar entre modo claro y oscuro');
-    
+    let themeToggle = document.getElementById('theme-toggle');
     const navContainer = document.querySelector('.nav-container');
-    if (navContainer && !document.getElementById('theme-toggle')) {
+    if (!themeToggle) {
+        themeToggle = document.createElement('button');
+        themeToggle.id = 'theme-toggle';
+        themeToggle.className = 'theme-toggle';
+        themeToggle.type = 'button';
+        themeToggle.title = 'Cambiar tema';
+        themeToggle.setAttribute('aria-label', 'Cambiar entre modo claro y oscuro');
+    }
+    if (navContainer && !themeToggle.parentElement) {
         navContainer.appendChild(themeToggle);
     }
-    
+    if (!themeToggle) return;
+
+    const root = document.documentElement;
+    const syncThemeButton = function() {
+        const isDark = root.classList.contains('dark-theme');
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#09070d' : '#f7f5fb');
+    };
+
     themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        root.classList.toggle('dark-theme');
+        const isDark = root.classList.contains('dark-theme');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        syncThemeButton();
     });
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
+
+    syncThemeButton();
+}
+
+function initializeMegaNavigation() {
+    const header = document.getElementById('header');
+    const clusters = document.querySelectorAll('.nav-cluster');
+    const menu = document.getElementById('nav-menu');
+    if (!header || !clusters.length || !menu) return;
+
+    let closeTimer;
+    let suppressFocus = false;
+    const mobile = () => window.matchMedia('(max-width: 980px)').matches;
+    const closeAll = () => {
+        window.clearTimeout(closeTimer);
+        clusters.forEach(item => {
+            item.classList.remove('preview-open');
+            item.querySelector(':scope > .nav-link')?.setAttribute('aria-expanded', 'false');
+        });
+    };
+    const open = cluster => {
+        closeAll();
+        cluster.classList.add('preview-open');
+        cluster.querySelector(':scope > .nav-link')?.setAttribute('aria-expanded', 'true');
+    };
+    clusters.forEach(cluster => {
+        const trigger = cluster.querySelector(':scope > .nav-link');
+        if (!trigger) return;
+        trigger.setAttribute('aria-expanded', 'false');
+        cluster.addEventListener('mouseenter', () => { if (!mobile()) open(cluster); });
+        cluster.addEventListener('mouseleave', () => {
+            if (!mobile()) closeTimer = window.setTimeout(closeAll, 200);
+        });
+        cluster.addEventListener('focusin', () => { if (!mobile() && !suppressFocus) open(cluster); });
+        cluster.addEventListener('focusout', event => {
+            if (!cluster.contains(event.relatedTarget)) closeAll();
+        });
+        trigger.addEventListener('click', event => {
+            if (mobile()) {
+                event.preventDefault();
+                const willOpen = !cluster.classList.contains('preview-open');
+                closeAll();
+                if (willOpen) open(cluster);
+            }
+        });
+        cluster.querySelectorAll('.nav-preview a').forEach(link => link.addEventListener('click', closeAll));
+        cluster.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                event.stopPropagation();
+                closeAll();
+                suppressFocus = true;
+                trigger.focus();
+                suppressFocus = false;
+            }
+        });
+    });
+
+    document.addEventListener('click', event => {
+        if (!header.contains(event.target)) {
+            closeAll();
+        }
+    });
+    header.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeAll();
+            menu.classList.remove('active');
+            const toggle = document.getElementById('nav-toggle');
+            toggle?.setAttribute('aria-expanded', 'false');
+            if (mobile()) toggle?.focus();
+        }
+    });
+    window.matchMedia('(max-width: 980px)').addEventListener('change', closeAll);
+}
+
+function initializeSectionIndices() {
+    // Stable heading IDs retain every topic; the compact index is an extra route in.
+    document.querySelectorAll('section.section[id]').forEach(section => {
+        const headings = Array.from(section.querySelectorAll('h3')).filter(heading => !heading.closest('.filter-section, .filter-container, .branch-explorer'));
+        const subtitle = section.querySelector('.section-subtitle');
+        if (headings.length < 3 || !subtitle) return;
+        const details = document.createElement('details');
+        details.className = 'section-index';
+        const summary = document.createElement('summary');
+        summary.textContent = typeof window.t === 'function' ? window.t('En este tema') : 'En este tema';
+        const nav = document.createElement('nav');
+        nav.setAttribute('aria-label', typeof window.t === 'function' ? window.t('Índice del tema') : 'Índice del tema');
+        headings.forEach((heading, index) => {
+            if (!heading.id) heading.id = `${section.id}-apartado-${index + 1}`;
+            const link = document.createElement('a');
+            link.href = `#${heading.id}`;
+            link.textContent = heading.textContent.trim();
+            link.addEventListener('click', () => {
+                // A branch filter can hide the destination: show its category first.
+                const card = heading.closest('.branch-card');
+                if (card?.classList.contains('hidden')) {
+                    section.querySelector('[data-filter="all"]')?.click();
+                    if (card.classList.contains('hidden')) document.getElementById('branch-toggle')?.click();
+                }
+                const category = heading.closest('.disorder-category');
+                if (category && !category.classList.contains('active')) section.querySelector(`.tab-button[data-category="${category.dataset.category}"]`)?.click();
+            });
+            nav.appendChild(link);
+        });
+        details.append(summary, nav);
+        subtitle.after(details);
+        document.addEventListener('languagechange', () => {
+            summary.textContent = window.t('En este tema');
+            nav.setAttribute('aria-label', window.t('Índice del tema'));
+            nav.querySelectorAll('a').forEach((link, index) => { link.textContent = headings[index].textContent.trim(); });
+        });
+    });
+}
+
+function initializeTimelinePlayer() {
+    const items = Array.from(document.querySelectorAll('#historia .timeline-item'));
+    const playButton = document.getElementById('timeline-play');
+    const previousButton = document.getElementById('timeline-prev');
+    const nextButton = document.getElementById('timeline-next');
+    const now = document.getElementById('timeline-now');
+    const count = document.getElementById('timeline-count');
+    const progress = document.getElementById('timeline-progress-bar');
+    if (!items.length || !playButton || !previousButton || !nextButton || !now || !count || !progress) return;
+
+    let current = 0;
+    let timer = null;
+    const translate = value => typeof window.t === 'function' ? window.t(value) : value;
+
+    const render = (shouldScroll = false) => {
+        items.forEach((item, index) => item.classList.toggle('is-current', index === current));
+        const active = items[current];
+        const era = active.querySelector('.timeline-era')?.textContent || active.dataset.year || '';
+        const title = active.querySelector('h3')?.textContent || '';
+        now.textContent = `${era} · ${title}`;
+        count.textContent = `${translate('Hito')} ${current + 1} ${translate('de')} ${items.length}`;
+        progress.style.width = `${((current + 1) / items.length) * 100}%`;
+        previousButton.disabled = current === 0;
+        nextButton.disabled = current === items.length - 1;
+        if (shouldScroll) {
+            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+            active.scrollIntoView({ behavior, block: 'center' });
+        }
+    };
+
+    const stop = () => {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+        playButton.setAttribute('aria-pressed', 'false');
+        playButton.innerHTML = `<i class="fas fa-play"></i><span>${translate('Reproducir')}</span>`;
+    };
+
+    const start = () => {
+        if (current === items.length - 1) current = 0;
+        playButton.setAttribute('aria-pressed', 'true');
+        playButton.innerHTML = `<i class="fas fa-pause"></i><span>${translate('Pausar')}</span>`;
+        render(true);
+        timer = window.setInterval(() => {
+            if (current >= items.length - 1) {
+                stop();
+                return;
+            }
+            current += 1;
+            render(true);
+        }, 5000);
+    };
+
+    playButton.addEventListener('click', () => timer ? stop() : start());
+    previousButton.addEventListener('click', () => { stop(); current = Math.max(0, current - 1); render(true); });
+    nextButton.addEventListener('click', () => { stop(); current = Math.min(items.length - 1, current + 1); render(true); });
+    items.forEach((item, index) => item.addEventListener('click', () => { stop(); current = index; render(false); }));
+    document.addEventListener('languagechange', () => { stop(); render(false); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+    new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(document.getElementById('historia'));
+    render(false);
 }
 
 // Mapa de paradigmas psicológicos — cajas interactivas
