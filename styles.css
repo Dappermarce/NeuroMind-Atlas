@@ -3750,6 +3750,11 @@ h1, h2, .hero-title, .section-title, .author-note h2,
 .nav-preview-links a:focus-visible { border-color: #7651d6; background: #201a29; transform: translateY(-2px); }
 .nav-preview-links span { font-size: 0.86rem; font-weight: 750; }
 .nav-preview-links small { margin-top: 0.35rem; color: #9e95a9; font-size: 0.67rem; line-height: 1.4; }
+.nav-preview-compact .nav-preview-links { align-content: center; }
+.nav-preview-compact .nav-preview-links a {
+    min-height: 112px;
+    justify-content: center;
+}
 
 .nav-actions { display: flex; align-items: center; gap: 0.35rem; min-width: max-content; }
 .nav-actions .theme-toggle,
@@ -3978,6 +3983,123 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 }
 .dark-theme .mbm-note { color: #c8bdcf; }
 
+/* Legacy diagrams now share the atlas night palette instead of keeping
+   yellow, pink, green, or white surfaces from the earlier design. */
+.dark-theme .paradigm-map,
+.dark-theme .latam-challenges,
+.dark-theme .disorder-network,
+.dark-theme .therapeutic-route {
+    border: 1px solid #342943;
+    background:
+        radial-gradient(circle at 78% 0%, rgba(118, 81, 214, 0.14), transparent 42%),
+        linear-gradient(145deg, #17121d, #0f0c13);
+    color: #e7dfea;
+    box-shadow: none;
+}
+.dark-theme .paradigm-map h3,
+.dark-theme .latam-challenges h3,
+.dark-theme .disorder-network h3,
+.dark-theme .therapeutic-route h3 { color: #f2eaf7; }
+.dark-theme .paradigm-hint { color: #cbb9db; }
+.dark-theme .paradigm-legend {
+    border: 1px solid #3a2e45;
+    background: #1b1621;
+    color: #ddd2e5;
+}
+.dark-theme .paradigm-section-label {
+    border: 1px solid #614a79;
+    background: #241a2d;
+    color: #d8c2ee;
+}
+.dark-theme .paradigm-node {
+    border: 1px solid #3b3045;
+    border-top: 4px solid #9c79e4;
+    background: #1b1621;
+    color: #f4eef7;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.24);
+}
+.dark-theme .paradigm-node:hover,
+.dark-theme .paradigm-node:focus-visible {
+    border-color: #9c79e4;
+    background: #251c2e;
+    box-shadow: 0 0 0 3px rgba(156,121,228,0.24);
+}
+.dark-theme .paradigm-node.is-active { box-shadow: 0 0 0 3px #9c79e4; }
+.dark-theme .paradigm-node i { color: #c6a9f2; }
+.dark-theme .paradigm-node span,
+.dark-theme .paradigm-node strong { color: #f4eef7; }
+.dark-theme .paradigm-node small { color: #c1b5ca; }
+.dark-theme .paradigm-arrow { background: #9c79e4; }
+.dark-theme .paradigm-arrow::after { border-top-color: #9c79e4; }
+.dark-theme .paradigm-split::before { border-top-color: #9c79e4; opacity: 0.82; }
+.dark-theme .paradigm-split .paradigm-node::before { border-left-color: #9c79e4; }
+.dark-theme .pl-swatch.pl-line,
+.dark-theme .pl-swatch.pl-coexist i { background: #9c79e4; }
+.dark-theme .pl-swatch.pl-branch { border-top-color: #9c79e4; }
+.dark-theme .paradigm-detail {
+    border: 1px solid #3c3048;
+    border-left: 4px solid #9c79e4;
+    background: #1b1621;
+    box-shadow: none;
+}
+.dark-theme .paradigm-detail h4 { color: #f2eaf7; }
+.dark-theme .paradigm-detail ul { color: #c8bdcf; }
+.dark-theme .paradigm-detail-close { color: #cdb8e8; }
+.dark-theme .challenge-item {
+    border: 1px solid #3a2f43;
+    background: #1b1621;
+    box-shadow: none;
+}
+.dark-theme .challenge-item i { color: #c5a7ec; }
+.dark-theme .challenge-item h4 { color: #f2eaf7; }
+.dark-theme .challenge-item p { color: #c8bdcf; opacity: 1; }
+.dark-theme .disorder-network > p,
+.dark-theme .therapeutic-route > p { color: #c8bdcf !important; opacity: 1; }
+.dark-theme .disorder-network-svg-wrap {
+    border: 1px solid #33283d;
+    border-radius: 16px;
+    background: #0d0a10;
+}
+.dark-theme .route-step {
+    border: 1px solid #3b3045;
+    border-top: 4px solid #9c79e4;
+    background: #1b1621;
+    box-shadow: none;
+}
+.dark-theme .route-icon,
+.dark-theme .route-arrow { color: #c3a7ef; }
+.dark-theme .route-label { color: #f2eaf7; }
+.dark-theme .route-sublabel { color: #c1b5ca; opacity: 1; }
+
+/* The ending repeats the opening atmosphere so the page closes as one
+   editorial system, while keeping every link clearly readable. */
+.footer,
+.dark-theme .footer {
+    border-top: 1px solid #2d2336;
+    background:
+        radial-gradient(circle at 78% 10%, rgba(128,78,207,0.2), transparent 28%),
+        linear-gradient(140deg, #09070d 0%, #110c17 58%, #17101f 100%);
+    color: #f4eef7;
+}
+.footer-section h3 { color: #d3bdf2; }
+.footer-section p,
+.footer-section a,
+.footer-bottom,
+.creator-signature { color: #c7bdcd; }
+.footer-section a:hover,
+.footer-section a:focus-visible { color: #ffffff; }
+.footer-bottom { border-top-color: #382c43; }
+.creator-signature a,
+.dark-theme .creator-signature a {
+    color: #eadff3;
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-color: #8263a3;
+    text-underline-offset: 4px;
+}
+.creator-signature a:hover,
+.creator-signature a:focus-visible { color: #ffffff; }
+
 @media (max-width: 780px) {
     .author-thread { grid-template-columns: 1fr; }
     .author-thread > i { display: none; }
@@ -4012,6 +4134,7 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
     .nav-preview-intro img, .nav-illustration-icon { display: none; }
     .nav-preview-links { grid-template-columns: 1fr; padding: 0; }
     .nav-preview-links a { min-height: 0; padding: 0.75rem 0.85rem; }
+    .nav-preview-compact .nav-preview-links a { min-height: 0; justify-content: flex-start; }
     .dark-theme .nav-menu { border-color: #302839 !important; background: rgba(12,9,15,0.98) !important; }
     .hero-container { padding-top: 7.5rem; }
 }
