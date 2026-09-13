@@ -260,7 +260,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (event.target === modal) closeModal();
             });
             modal.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') closeModal();
+                if (event.key === 'Escape') { event.preventDefault(); closeModal(); }
+                if (event.key === 'Tab') {
+                    const controls = modal.querySelectorAll('button, a[href], [tabindex="0"]');
+                    const first = controls[0];
+                    const last = controls[controls.length - 1];
+                    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+                }
             });
             modal.querySelector('.book-modal-close').focus();
         });
@@ -305,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeThemeToggle();
     initializeTimelinePlayer();
     initializeMegaNavigation();
+    initializeSectionIndices();
     initializeSabiasQue();
     
     console.log('Psicología & Psiquiatría – Guía Completa cargada exitosamente! 🧠✨');
@@ -315,32 +323,26 @@ document.addEventListener('DOMContentLoaded', function() {
 // =============================================
 function initializeSabiasQue() {
     const facts = [
-        "Un metaanálisis mundial estimó que el 62,5 % de las personas con un trastorno mental había presentado su inicio antes de los 25 años (Solmi et al., 2022).",
-        "La psicología cognitiva demostró que podemos sostener 7±2 elementos en la memoria de trabajo (Miller, 1956).",
-        "Tomar la misma decisión repetidamente agota nuestra capacidad cognitiva — se llama 'fatiga de decisiones'.",
-        "El cerebro consume el 20% de toda la energía del cuerpo, aunque solo representa el 2% del peso corporal.",
-        "La terapia cognitivo-conductual (TCC) es eficaz para más de 20 trastornos mentales diferentes.",
-        "Pavlov descubrió el condicionamiento clásico mientras estudiaba la digestión en perros, no la psicología.",
-        "La depresión mayor afecta a 280 millones de personas en todo el mundo (OMS, 2022).",
-        "El hipocampo, clave para la memoria, puede generar nuevas neuronas incluso en la adultez.",
-        "El 'efecto placebo' es tan potente que puede producir cambios físicos medibles en el cerebro.",
-        "Los taxistas de Londres tienen más volumen en el hipocampo posterior por su uso intensivo de la navegación espacial.",
+        "Que dos cosas cambien juntas no demuestra que una cause la otra. La correlación es una pista, no el final de la investigación.",
+        "Un promedio describe un grupo; no cuenta, por sí solo, la historia de una persona.",
+        "Una idea puede ser importante para la historia de la psicología sin tener el mismo respaldo en la investigación actual.",
+        "Antes de compartir una cifra, pregunta: ¿de qué año es, a quiénes incluye y cómo se obtuvo?",
+        "Una clasificación organiza información clínica. No sustituye una evaluación profesional ni define a una persona.",
     ];
     const el = document.getElementById('sabias-text');
     if (!el) return;
 
     let current = 0;
-    setInterval(() => {
+    const translate = value => typeof window.t === 'function' ? window.t(value) : value;
+    const nextButton = document.getElementById('sabias-next');
+    const render = () => { el.textContent = translate(facts[current]); };
+    // Manual progression gives readers as much time as they need.
+    nextButton?.addEventListener('click', () => {
         current = (current + 1) % facts.length;
-        el.style.opacity = '0';
-        setTimeout(() => {
-            el.textContent = facts[current];
-            el.style.opacity = '1';
-        }, 400);
-    }, 7000);
-
-    // Fade transition style
-    el.style.transition = 'opacity 0.4s ease';
+        render();
+    });
+    document.addEventListener('languagechange', render);
+    render();
 }
 
 // =============================================
@@ -1122,31 +1124,107 @@ function initializeMegaNavigation() {
     const menu = document.getElementById('nav-menu');
     if (!header || !clusters.length || !menu) return;
 
+    let closeTimer;
+    let suppressFocus = false;
+    const mobile = () => window.matchMedia('(max-width: 980px)').matches;
+    const closeAll = () => {
+        window.clearTimeout(closeTimer);
+        clusters.forEach(item => {
+            item.classList.remove('preview-open');
+            item.querySelector(':scope > .nav-link')?.setAttribute('aria-expanded', 'false');
+        });
+    };
+    const open = cluster => {
+        closeAll();
+        cluster.classList.add('preview-open');
+        cluster.querySelector(':scope > .nav-link')?.setAttribute('aria-expanded', 'true');
+    };
     clusters.forEach(cluster => {
         const trigger = cluster.querySelector(':scope > .nav-link');
         if (!trigger) return;
+        trigger.setAttribute('aria-expanded', 'false');
+        cluster.addEventListener('mouseenter', () => { if (!mobile()) open(cluster); });
+        cluster.addEventListener('mouseleave', () => {
+            if (!mobile()) closeTimer = window.setTimeout(closeAll, 200);
+        });
+        cluster.addEventListener('focusin', () => { if (!mobile() && !suppressFocus) open(cluster); });
+        cluster.addEventListener('focusout', event => {
+            if (!cluster.contains(event.relatedTarget)) closeAll();
+        });
         trigger.addEventListener('click', event => {
-            if (window.matchMedia('(max-width: 980px)').matches) {
+            if (mobile()) {
                 event.preventDefault();
                 const willOpen = !cluster.classList.contains('preview-open');
-                clusters.forEach(item => item.classList.remove('preview-open'));
-                cluster.classList.toggle('preview-open', willOpen);
-                trigger.setAttribute('aria-expanded', String(willOpen));
+                closeAll();
+                if (willOpen) open(cluster);
             }
         });
+        cluster.querySelectorAll('.nav-preview a').forEach(link => link.addEventListener('click', closeAll));
         cluster.addEventListener('keydown', event => {
             if (event.key === 'Escape') {
-                cluster.classList.remove('preview-open');
-                trigger.setAttribute('aria-expanded', 'false');
+                event.preventDefault();
+                event.stopPropagation();
+                closeAll();
+                suppressFocus = true;
                 trigger.focus();
+                suppressFocus = false;
             }
         });
     });
 
     document.addEventListener('click', event => {
         if (!header.contains(event.target)) {
-            clusters.forEach(item => item.classList.remove('preview-open'));
+            closeAll();
         }
+    });
+    header.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeAll();
+            menu.classList.remove('active');
+            const toggle = document.getElementById('nav-toggle');
+            toggle?.setAttribute('aria-expanded', 'false');
+            if (mobile()) toggle?.focus();
+        }
+    });
+    window.matchMedia('(max-width: 980px)').addEventListener('change', closeAll);
+}
+
+function initializeSectionIndices() {
+    // Stable heading IDs retain every topic; the compact index is an extra route in.
+    document.querySelectorAll('section.section[id]').forEach(section => {
+        const headings = Array.from(section.querySelectorAll('h3')).filter(heading => !heading.closest('.filter-section, .filter-container, .branch-explorer'));
+        const subtitle = section.querySelector('.section-subtitle');
+        if (headings.length < 3 || !subtitle) return;
+        const details = document.createElement('details');
+        details.className = 'section-index';
+        const summary = document.createElement('summary');
+        summary.textContent = typeof window.t === 'function' ? window.t('En este tema') : 'En este tema';
+        const nav = document.createElement('nav');
+        nav.setAttribute('aria-label', typeof window.t === 'function' ? window.t('Índice del tema') : 'Índice del tema');
+        headings.forEach((heading, index) => {
+            if (!heading.id) heading.id = `${section.id}-apartado-${index + 1}`;
+            const link = document.createElement('a');
+            link.href = `#${heading.id}`;
+            link.textContent = heading.textContent.trim();
+            link.addEventListener('click', () => {
+                // A branch filter can hide the destination: show its category first.
+                const card = heading.closest('.branch-card');
+                if (card?.classList.contains('hidden')) {
+                    section.querySelector('[data-filter="all"]')?.click();
+                    if (card.classList.contains('hidden')) document.getElementById('branch-toggle')?.click();
+                }
+                const category = heading.closest('.disorder-category');
+                if (category && !category.classList.contains('active')) section.querySelector(`.tab-button[data-category="${category.dataset.category}"]`)?.click();
+            });
+            nav.appendChild(link);
+        });
+        details.append(summary, nav);
+        subtitle.after(details);
+        document.addEventListener('languagechange', () => {
+            summary.textContent = window.t('En este tema');
+            nav.setAttribute('aria-label', window.t('Índice del tema'));
+            nav.querySelectorAll('a').forEach((link, index) => { link.textContent = headings[index].textContent.trim(); });
+        });
     });
 }
 
@@ -1207,6 +1285,8 @@ function initializeTimelinePlayer() {
     nextButton.addEventListener('click', () => { stop(); current = Math.min(items.length - 1, current + 1); render(true); });
     items.forEach((item, index) => item.addEventListener('click', () => { stop(); current = index; render(false); }));
     document.addEventListener('languagechange', () => { stop(); render(false); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+    new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(document.getElementById('historia'));
     render(false);
 }
 

@@ -52,7 +52,7 @@ window.TRANSLATIONS = {
   "Durante la Edad Media europea, el pensamiento sobre la mente estaba dominado por la teología. Los trastornos mentales solían interpretarse como posesión demoníaca o castigo divino. Sin embargo, en el mundo islámico florecían hospitales mentales (bimaristán) que ofrecían tratamiento humanitario.": "During the European Middle Ages, thinking about the mind was dominated by theology. Mental disorders were often interpreted as demonic possession or divine punishment. However, in the Islamic world, mental hospitals (bimaristan) flourished, offering humane treatment.",
   "El": "The",
   "bimaristán de Bagdad": "Baghdad bimaristan",
-  "(siglo IX) figura entre los antecedentes tempranos de atención hospitalaria organizada; describirlo con la categoría moderna de “hospital psiquiátrico” requiere cautela.": "(9th century) is among the early precedents of organized hospital care; describing it with the modern category of a ‘psychiatric hospital’ requires caution.",
+  "figura entre los antecedentes de atención hospitalaria organizada; describirlo con la categoría moderna de “hospital psiquiátrico” requiere cautela.": "is among the precedents of organized hospital care; describing it with the modern category of a ‘psychiatric hospital’ requires caution.",
   "Tomás de Aquino": "Thomas Aquinas",
   "integró la psicología aristotélica en la filosofía cristiana.": "integrated Aristotelian psychology into Christian philosophy.",
   "En Europa, los enfermos mentales eran frecuentemente excluidos; algunos eran internados en manicomios con condiciones deplorables.": "In Europe, the mentally ill were frequently excluded; some were confined in asylums with deplorable conditions.",
@@ -1473,5 +1473,14 @@ window.TRANSLATIONS = {
   "Observa cómo sus ideas sobre la relación terapéutica dialogan con evidencia posterior sobre alianza y empatía.": "Notice how its ideas about the therapeutic relationship connect with later evidence on alliance and empathy.",
   "Acompáñalo con el análisis ético y metodológico posterior de los experimentos de Milgram.": "Pair it with later ethical and methodological analyses of Milgram’s experiments.",
   "Contrasta sus propuestas con revisiones actuales y separa los ejercicios prácticos de las afirmaciones generales sobre bienestar.": "Compare its proposals with current reviews and separate practical exercises from general claims about well-being.",
-  "Úsalo como introducción narrativa a la neuroplasticidad; los casos ilustran posibilidades, pero no sustituyen evidencia clínica comparativa.": "Use it as a narrative introduction to neuroplasticity; the cases illustrate possibilities but do not replace comparative clinical evidence."
+  "Úsalo como introducción narrativa a la neuroplasticidad; los casos ilustran posibilidades, pero no sustituyen evidencia clínica comparativa.": "Use it as a narrative introduction to neuroplasticity; the cases illustrate possibilities but do not replace comparative clinical evidence.",
+  "Antes de concluir": "Before drawing conclusions",
+  "Otra pregunta": "Another question",
+  "En este tema": "In this topic",
+  "Índice del tema": "Topic index",
+  "Que dos cosas cambien juntas no demuestra que una cause la otra. La correlación es una pista, no el final de la investigación.": "Two things changing together does not prove that one causes the other. Correlation is a clue, not the end of the investigation.",
+  "Un promedio describe un grupo; no cuenta, por sí solo, la historia de una persona.": "An average describes a group; on its own, it does not tell one person's story.",
+  "Una idea puede ser importante para la historia de la psicología sin tener el mismo respaldo en la investigación actual.": "An idea can matter to the history of psychology without having the same support in current research.",
+  "Antes de compartir una cifra, pregunta: ¿de qué año es, a quiénes incluye y cómo se obtuvo?": "Before sharing a figure, ask: what year is it from, who does it include, and how was it obtained?",
+  "Una clasificación organiza información clínica. No sustituye una evaluación profesional ni define a una persona.": "A classification organizes clinical information. It does not replace a professional assessment or define a person."
 };
