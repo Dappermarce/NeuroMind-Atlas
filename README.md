@@ -30,7 +30,7 @@ Autoría y revisión profesional
 
 NeuroMind Atlas fue creado y desarrollado de manera independiente por Marcelo C. K. Su contenido contó con la revisión y las observaciones de psicólogos y psiquiatras.
 
-Última revisión: julio de 2026.
+Última revisión: septiembre de 2026.
 
 Documentación del proyecto
 
