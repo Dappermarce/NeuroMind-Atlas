@@ -1140,7 +1140,7 @@ window.TRANSLATIONS = {
   "No se encontraron resultados": "No results found",
   "Cambiar tema": "Change theme",
   "Cambiar entre modo claro y oscuro": "Toggle between light and dark mode",
-  "Fuera del índice": "Beyond the index",
+  "Nota al margen": "Margin note",
   "La repetición también es un dato.": "Repetition is data too.",
   "Una observación persistente empieza a parecer un método.": "A persistent observation begins to resemble a method.",
   "Curiosidad registrada. Interpretación pendiente.": "Curiosity recorded. Interpretation pending.",
