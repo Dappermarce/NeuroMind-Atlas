@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "No toda conducta repetida requiere una explicación. Pero admitimos que esta resulta interesante."
         ];
 
-        const showMarginNote = (message, index) => {
+        const showMarginNote = (message) => {
             document.querySelector('.atlas-easter-note')?.remove();
             if (noteTimer) window.clearTimeout(noteTimer);
 
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             note.setAttribute('aria-live', 'polite');
 
             const label = document.createElement('span');
-            label.textContent = `${typeof t === 'function' ? t('Nota al margen') : 'Nota al margen'} · ${String(index + 1).padStart(2, '0')}/${String(messages.length).padStart(2, '0')}`;
+            label.textContent = typeof t === 'function' ? t('Nota al margen') : 'Nota al margen';
             const copy = document.createElement('p');
             copy.textContent = typeof t === 'function' ? t(message) : message;
             note.append(label, copy);
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clickCount++;
             if (clickCount % 5 === 0) {
                 const index = clickCount / 5 - 1;
-                showMarginNote(messages[index], index);
+                showMarginNote(messages[index]);
                 if (index === messages.length - 1) clickCount = 0;
             }
         });
