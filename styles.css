@@ -3983,6 +3983,106 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 }
 .dark-theme .mbm-note { color: #c8bdcf; }
 
+/* Psychiatry and disorder cards used to retain white and pale-blue legacy
+   surfaces after the surrounding page switched to night mode. */
+.dark-theme .psychiatry-content h3,
+.dark-theme .comparison-table h4,
+.dark-theme .area-card h4 { color: #f4eef7; }
+.dark-theme .psychiatry-content p,
+.dark-theme .area-card > p,
+.dark-theme .area-list li,
+.dark-theme .neurotransmitter-list li { color: #c8bdcf; opacity: 1; }
+.dark-theme .comparison-table {
+    border: 1px solid #342a3e;
+    border-radius: 14px;
+    background: #121016;
+}
+.dark-theme .comparison-table h4 { padding: 1rem 1rem 0; }
+.dark-theme .comparison-table th {
+    border-color: #4a3958;
+    background: #2b2035;
+    color: #f5eff8;
+}
+.dark-theme .comparison-table td {
+    border-bottom-color: #342a3e;
+    background: #18131d;
+    color: #d3c9d9;
+}
+.dark-theme .comparison-table tr:nth-child(even) td { background: #211a27; }
+.dark-theme .neurotransmitter-list li,
+.dark-theme .area-list li { border-bottom-color: #372d40; }
+.dark-theme .area-card {
+    border-color: #392e43;
+    border-left-color: #9c79e4;
+    background: #18131d;
+}
+.dark-theme .area-icon { color: #c6a9f2; }
+.dark-theme .disorders-categories,
+.dark-theme .disorders-content { background: #0f0c12; }
+.dark-theme .category-tabs {
+    border-bottom-color: #392e43;
+    background: #17131b;
+}
+.dark-theme .disorder-card,
+.dark-theme .disorder-card:hover {
+    border-left-color: #a982e7;
+    background: #18131d;
+    color: #eee8f2;
+    box-shadow: none;
+}
+.dark-theme .disorder-card > p,
+.dark-theme .disorder-detail,
+.dark-theme .disorder-detail p,
+.dark-theme .disorder-detail li { color: #c8bdcf; opacity: 1; }
+.dark-theme .disorder-detail strong { color: #f2eaf7; }
+.dark-theme .disorder-stats { border-top-color: #392e43; }
+.dark-theme .treatment-integral { border-top-color: #5d4773; }
+.dark-theme .treatment-integral h5,
+.dark-theme .treatment-integral h5 i { color: #d9c3f4; }
+.dark-theme .ti-block {
+    border: 1px solid #463653;
+    border-left: 3px solid #9c79e4;
+    background: #21182a;
+}
+.dark-theme .ti-block strong { color: #eadff3; }
+.dark-theme .ti-block p { color: #c8bdcf; opacity: 1; }
+
+/* Editorial easter egg: a margin note, not a game achievement. */
+.atlas-easter-note {
+    position: fixed;
+    right: clamp(0.8rem, 3vw, 2rem);
+    bottom: clamp(0.8rem, 3vw, 2rem);
+    z-index: 12000;
+    width: min(390px, calc(100vw - 1.6rem));
+    padding: 1rem 1.1rem;
+    border: 1px solid #49375a;
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 90% 0%, rgba(156,121,228,0.22), transparent 42%),
+        #110d16;
+    color: #f4eef7;
+    box-shadow: 0 20px 55px rgba(9,5,13,0.38);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 200ms ease, transform 200ms ease;
+    pointer-events: none;
+}
+.atlas-easter-note.is-visible { opacity: 1; transform: translateY(0); }
+.atlas-easter-note span {
+    color: #bda4e5;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.atlas-easter-note p {
+    margin-top: 0.45rem;
+    color: #eee7f3;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.45;
+}
+
 /* Legacy diagrams now share the atlas night palette instead of keeping
    yellow, pink, green, or white surfaces from the earlier design. */
 .dark-theme .paradigm-map,
