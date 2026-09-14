@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             note.setAttribute('aria-live', 'polite');
 
             const label = document.createElement('span');
-            label.textContent = typeof t === 'function' ? t('Nota al margen') : 'Nota al margen';
+            label.textContent = typeof t === 'function' ? t('Fuera del índice') : 'Fuera del índice';
             const copy = document.createElement('p');
             copy.textContent = typeof t === 'function' ? t(message) : message;
             note.append(label, copy);
