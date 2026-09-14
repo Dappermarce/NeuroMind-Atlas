@@ -280,22 +280,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add easter egg for psychology enthusiasts
+    // A quiet set of margin notes for readers who keep exploring.
     let clickCount = 0;
+    let noteTimer = null;
     const logo = document.querySelector('.nav-logo');
     if (logo) {
-        logo.addEventListener('click', function() {
+        const messages = [
+            "La repetición también es un dato.",
+            "Una observación persistente empieza a parecer un método.",
+            "Curiosidad registrada. Interpretación pendiente.",
+            "No toda conducta repetida requiere una explicación. Pero admitimos que esta resulta interesante."
+        ];
+
+        const showMarginNote = (message, index) => {
+            document.querySelector('.atlas-easter-note')?.remove();
+            if (noteTimer) window.clearTimeout(noteTimer);
+
+            const note = document.createElement('aside');
+            note.className = 'atlas-easter-note';
+            note.setAttribute('role', 'status');
+            note.setAttribute('aria-live', 'polite');
+
+            const label = document.createElement('span');
+            label.textContent = `${typeof t === 'function' ? t('Nota al margen') : 'Nota al margen'} · ${String(index + 1).padStart(2, '0')}/${String(messages.length).padStart(2, '0')}`;
+            const copy = document.createElement('p');
+            copy.textContent = typeof t === 'function' ? t(message) : message;
+            note.append(label, copy);
+            document.body.appendChild(note);
+            window.requestAnimationFrame(() => note.classList.add('is-visible'));
+
+            noteTimer = window.setTimeout(() => {
+                note.classList.remove('is-visible');
+                window.setTimeout(() => note.remove(), 220);
+            }, 5200);
+        };
+
+        logo.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (window.location.hash) {
+                window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+            }
+
             clickCount++;
-            if (clickCount >= 5) {
-                const messages = [
-                    "¡Eres un verdadero entusiasta de la psicología! 🧠",
-                    "La curiosidad es el motor del aprendizaje 🔍",
-                    "Sigmund Freud estaría orgulloso de tu persistencia 👨‍⚕️",
-                    "¡Has desbloqueado el nivel de psicólogo experto! 🎓"
-                ];
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                alert(typeof t === 'function' ? t(randomMessage) : randomMessage);
-                clickCount = 0;
+            if (clickCount % 5 === 0) {
+                const index = clickCount / 5 - 1;
+                showMarginNote(messages[index], index);
+                if (index === messages.length - 1) clickCount = 0;
             }
         });
     }
