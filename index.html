@@ -204,6 +204,7 @@
             <div class="reading-time"><i class="fas fa-clock"></i> Tiempo estimado de lectura: 8 min</div>
 
             <div class="timeline-player" aria-label="Reproductor de la historia de la psicología">
+                <button type="button" class="timeline-player-dismiss" id="timeline-dismiss" aria-label="Ocultar recorrido" title="Ocultar recorrido"><i class="fas fa-xmark" aria-hidden="true"></i></button>
                 <div class="timeline-player-copy"><span class="timeline-player-kicker">Recorrido guiado</span><strong id="timeline-now">Antigüedad · Raíces filosóficas</strong><small id="timeline-count">Hito 1 de 10</small></div>
                 <div class="timeline-player-controls">
                     <button type="button" id="timeline-prev" aria-label="Hito anterior"><i class="fas fa-backward-step"></i></button>
@@ -212,6 +213,7 @@
                 </div>
                 <div class="timeline-progress" aria-hidden="true"><span id="timeline-progress-bar"></span></div>
             </div>
+            <button type="button" class="timeline-player-restore" id="timeline-restore" hidden><i class="fas fa-play" aria-hidden="true"></i><span>Mostrar recorrido</span></button>
 
             <div class="timeline">
 
@@ -509,8 +511,8 @@
     </section>
 
     <!-- Ramas Section -->
-    <aside class="author-thread" aria-label="Hilo del autor">
-        <span>Hilo del autor</span><div><h2>Una línea de tiempo ordena fechas; el pasado nunca fue tan ordenado.</h2><p>Las escuelas no esperaron su turno. Coexistieron, discutieron y a veces nombraron el mismo problema de maneras incompatibles. La secuencia ayuda a orientarse; los límites impiden convertirla en una marcha inevitable hacia la verdad.</p></div><i aria-hidden="true">M</i>
+    <aside class="author-thread" aria-label="Pausa del autor">
+        <span>Pausa del autor</span><div><h2>Una línea de tiempo ordena fechas; el pasado nunca fue tan ordenado.</h2><p>Las escuelas no esperaron su turno. Coexistieron, discutieron y a veces nombraron el mismo problema de maneras incompatibles. La secuencia ayuda a orientarse; los límites impiden convertirla en una marcha inevitable hacia la verdad.</p></div><i aria-hidden="true">M</i>
     </aside>
 
     <section class="section" id="ramas">
@@ -1553,8 +1555,8 @@
     </section>
 
     <!-- Trastornos Mentales Section -->
-    <aside class="author-thread" aria-label="Hilo del autor">
-        <span>Hilo del autor</span><div><h2>Nombrar algo puede ayudar. Creer que el nombre lo explica todo, bastante menos.</h2><p>Una categoría organiza patrones y puede orientar decisiones profesionales. No resume cómo llegó una persona hasta allí, qué contexto la rodea ni qué necesita. Por eso este atlas presenta criterios, ejemplos y límites en la misma página.</p></div><i aria-hidden="true">M</i>
+    <aside class="author-thread" aria-label="Pausa del autor">
+        <span>Pausa del autor</span><div><h2>Nombrar algo puede ayudar. Creer que el nombre lo explica todo, bastante menos.</h2><p>Una categoría organiza patrones y puede orientar decisiones profesionales. No resume cómo llegó una persona hasta allí, qué contexto la rodea ni qué necesita. Por eso este atlas presenta criterios, ejemplos y límites en la misma página.</p></div><i aria-hidden="true">M</i>
     </aside>
 
     <section class="section" id="trastornos">
@@ -2432,8 +2434,8 @@
     </section>
 
     <!-- Interactive Section (sin juego de memoria) -->
-    <aside class="author-thread" aria-label="Hilo del autor">
-        <span>Hilo del autor</span><div><h2>Leer una fuente no es coleccionar autoridad.</h2><p>Es mirar qué preguntó, con quién trabajó, cómo midió y qué no puede concluir. Una cita puede respaldar una frase; comprenderla exige seguir el recorrido completo. La curiosidad empieza donde termina el resumen.</p></div><i aria-hidden="true">M</i>
+    <aside class="author-thread" aria-label="Pausa del autor">
+        <span>Pausa del autor</span><div><h2>Leer una fuente no es coleccionar autoridad.</h2><p>Es mirar qué preguntó, con quién trabajó, cómo midió y qué no puede concluir. Una cita puede respaldar una frase; comprenderla exige seguir el recorrido completo. La curiosidad empieza donde termina el resumen.</p></div><i aria-hidden="true">M</i>
     </aside>
 
     <section class="section" id="interactivo">
@@ -2552,11 +2554,13 @@
                 <div class="interactive-module">
                     <div class="module-header">
                         <h3><i class="fas fa-question-circle"></i> Quiz de Psicología</h3>
-                        <p>Pon a prueba tus conocimientos sobre psicología y psiquiatría con 5 preguntas verificadas</p>
+                        <p>Diez preguntas para conectar historia, métodos, conceptos y lectura crítica; es una actividad educativa, no una evaluación personal.</p>
                     </div>
                     <div class="psychology-quiz">
                         <div class="quiz-question">
+                            <p class="quiz-category" id="quiz-category">Historia</p>
                             <h4 id="quiz-question-text">¿Quién es considerado el padre del psicoanálisis?</h4>
+                            <div class="quiz-progress" aria-hidden="true"><span id="quiz-progress-bar"></span></div>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-correct="true">Sigmund Freud</button>
                                 <button class="quiz-option" data-correct="false">Carl Jung</button>
