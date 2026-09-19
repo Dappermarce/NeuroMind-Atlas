@@ -3805,7 +3805,7 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 .section-title { color: #241b2a; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 600; }
 .section-subtitle { max-width: 72ch; color: var(--atlas-muted); }
 
-.timeline-player { position: sticky; top: 88px; z-index: 30; display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 0.8rem 1rem; align-items: center; margin: 2rem 0 3rem; padding: 0.9rem 1rem; border: 1px solid #332a3d; border-radius: 17px; background: rgba(15, 12, 18, 0.94); color: #f8f3fb; box-shadow: 0 18px 45px rgba(20, 10, 26, 0.24); backdrop-filter: blur(16px); }
+.timeline-player { position: relative; top: auto; z-index: 2; display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 0.8rem 1rem; align-items: center; margin: 2rem 0 3rem; padding: 0.9rem 1rem; border: 1px solid #332a3d; border-radius: 17px; background: rgba(15, 12, 18, 0.94); color: #f8f3fb; box-shadow: 0 18px 45px rgba(20, 10, 26, 0.24); backdrop-filter: blur(16px); }
 .timeline-player-copy { display: grid; min-width: 0; }
 .timeline-player-kicker { color: #a98bea; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
 .timeline-player-copy strong { overflow: hidden; margin-top: 0.18rem; font-size: 0.82rem; text-overflow: ellipsis; white-space: nowrap; }
@@ -4268,7 +4268,7 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
     .atlas-index h2 { font-size: clamp(2.4rem, 11vw, 3.5rem); }
     .atlas-index-grid { grid-template-columns: 1fr; }
     .index-card { min-height: 0; padding: 1.15rem; }
-    .timeline-player { top: 72px; grid-template-columns: 1fr; }
+    .timeline-player { top: auto; grid-template-columns: 1fr; }
     .timeline-player-controls { justify-content: space-between; }
     .timeline-player button { flex: 1; }
     .book-guide-grid { grid-template-columns: 1fr; }
@@ -4506,6 +4506,76 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 .dark-theme .quiz-option:hover:not(.disabled),
 .dark-theme .quiz-option:focus-visible:not(.disabled) { border-color: #9c79e4; background: #2a2033; }
 
+/* El recorrido permanece dentro del flujo de Historia: no persigue el scroll
+   ni cubre las fichas, y puede cerrarse o recuperarse con un control explícito. */
+.timeline-player { position: relative; top: auto; z-index: 2; padding-right: 3.6rem; }
+.timeline-player-dismiss {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 34px;
+    min-width: 34px !important;
+    height: 34px;
+    min-height: 34px;
+    padding: 0 !important;
+    border-radius: 9px !important;
+}
+.timeline-player-restore {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 44px;
+    margin: 0 0 2rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid #7651d6;
+    border-radius: 12px;
+    background: #20172a;
+    color: #f4eef7;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.timeline-player-restore:hover,
+.timeline-player-restore:focus-visible { border-color: #aa8bf0; background: #2a2035; }
+.timeline-player-restore[hidden] { display: none !important; }
+
+/* Conceptos usa lavanda editorial en claro, no el gris genérico heredado. */
+.accordion-item { border: 1px solid #ded5e7; background: #fff; box-shadow: 0 8px 22px rgba(63, 42, 79, 0.08); }
+.accordion-header { background: #f3eef7; color: #2c2233; }
+.accordion-header:hover { background: #ebe3f1; }
+.accordion-content { background: #fff; color: #4c4353; }
+.dark-theme .accordion-item { border-color: #392e43; background: #18131d; }
+.dark-theme .accordion-header { background: #211a27; color: #f1ebf5; }
+.dark-theme .accordion-header:hover { background: #2a2033; }
+.dark-theme .accordion-header.active { background: #7651d6; color: #fff; }
+.dark-theme .accordion-content { background: #18131d; color: #d4cbd9; }
+
+.quiz-category {
+    width: fit-content;
+    margin: 0 auto 0.65rem;
+    padding: 0.32rem 0.65rem;
+    border: 1px solid #d4c6e3;
+    border-radius: 999px;
+    background: #eee8f5;
+    color: #684393;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.quiz-progress { height: 4px; margin: 0.9rem 0 1.4rem; overflow: hidden; border-radius: 999px; background: #e4dce9; }
+.quiz-progress span { display: block; width: 10%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #7651d6, #b497f2); transition: width 220ms ease; }
+.result-feedback[data-state="correct"] strong { color: #2f7251; }
+.result-feedback[data-state="review"] strong { color: #985266; }
+.result-feedback[data-state="summary"] strong { color: #684393; }
+.dark-theme .quiz-category { border-color: #58446a; background: #2a2033; color: #d7c2f2; }
+.dark-theme .quiz-progress { background: #34283e; }
+.dark-theme .result-feedback[data-state="correct"] strong { color: #83d2aa; }
+.dark-theme .result-feedback[data-state="review"] strong { color: #efafbd; }
+.dark-theme .result-feedback[data-state="summary"] strong { color: #cdb4ef; }
+
 @media (max-width: 980px) {
     .brand-copy { display: grid; }
     .brand-copy small { display: none; }
@@ -4517,7 +4587,7 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
     .section { padding-block: 4rem; }
     .section-index nav { grid-template-columns: 1fr; }
     .section-index { margin-top: 1.2rem; }
-    .timeline-player { margin: 1.3rem 0 2rem; }
+    .timeline-player { top: auto; margin: 1.3rem 0 2rem; padding: 3.2rem 0.9rem 0.9rem; }
     .timeline-player-copy strong { max-width: calc(100vw - 4rem); }
     .latam-grid { grid-template-columns: 1fr; }
     .latam-intro, .latam-card, .latam-challenges, .disorder-network, .therapeutic-route { padding: 1.15rem; }
