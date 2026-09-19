@@ -1228,6 +1228,7 @@ function initializeSectionIndices() {
         if (headings.length < 3 || !subtitle) return;
         const details = document.createElement('details');
         details.className = 'section-index';
+        if (section.id === 'historia') details.open = true;
         const summary = document.createElement('summary');
         summary.textContent = typeof window.t === 'function' ? window.t('En este tema') : 'En este tema';
         const nav = document.createElement('nav');
@@ -1267,7 +1268,9 @@ function initializeTimelinePlayer() {
     const now = document.getElementById('timeline-now');
     const count = document.getElementById('timeline-count');
     const progress = document.getElementById('timeline-progress-bar');
-    if (!items.length || !playButton || !previousButton || !nextButton || !now || !count || !progress) return;
+    const player = document.querySelector('#historia .timeline-player');
+    const historySection = document.getElementById('historia');
+    if (!items.length || !playButton || !previousButton || !nextButton || !now || !count || !progress || !player || !historySection) return;
 
     let current = 0;
     let timer = null;
@@ -1317,7 +1320,11 @@ function initializeTimelinePlayer() {
     items.forEach((item, index) => item.addEventListener('click', () => { stop(); current = index; render(false); }));
     document.addEventListener('languagechange', () => { stop(); render(false); });
     document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
-    new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(document.getElementById('historia'));
+    new IntersectionObserver(entries => {
+        const sectionIsVisible = entries[0].isIntersecting;
+        player.toggleAttribute('hidden', !sectionIsVisible);
+        if (!sectionIsVisible) stop();
+    }, { threshold: 0.01 }).observe(historySection);
     render(false);
 }
 
