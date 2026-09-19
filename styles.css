@@ -4047,11 +4047,11 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 .dark-theme .ti-block strong { color: #eadff3; }
 .dark-theme .ti-block p { color: #c8bdcf; opacity: 1; }
 
-/* Editorial easter egg: a margin note, not a game achievement. */
+/* An unindexed editorial aside, not a game achievement. */
 .atlas-easter-note {
     position: fixed;
-    right: clamp(0.8rem, 3vw, 2rem);
-    bottom: clamp(0.8rem, 3vw, 2rem);
+    right: max(clamp(0.8rem, 3vw, 2rem), env(safe-area-inset-right));
+    bottom: max(clamp(0.8rem, 3vw, 2rem), env(safe-area-inset-bottom));
     z-index: 12000;
     width: min(390px, calc(100vw - 1.6rem));
     padding: 1rem 1.1rem;
@@ -4069,11 +4069,20 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
 }
 .atlas-easter-note.is-visible { opacity: 1; transform: translateY(0); }
 .atlas-easter-note span {
-    color: #bda4e5;
-    font-size: 0.62rem;
+    color: #c9b1ed;
+    font-size: 0.64rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+.atlas-easter-note span::before {
+    content: '';
+    display: inline-block;
+    width: 0.45rem;
+    height: 1px;
+    margin-right: 0.5rem;
+    background: #9c79e4;
+    vertical-align: middle;
 }
 .atlas-easter-note p {
     margin-top: 0.45rem;
@@ -4081,6 +4090,17 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
     font-family: 'Newsreader', Georgia, serif;
     font-size: 1.05rem;
     line-height: 1.45;
+}
+
+@media (max-width: 600px) {
+    .atlas-easter-note {
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: max(0.75rem, env(safe-area-inset-bottom));
+        width: auto;
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+    }
 }
 
 /* Legacy diagrams now share the atlas night palette instead of keeping
@@ -4262,4 +4282,259 @@ section h3[id], #resources-books, #resources-articles, #resources-centers, #reso
     .hero-stats { grid-template-columns: 1fr 1fr; }
     .timeline-player-copy strong { max-width: 90vw; }
     .timeline-player .timeline-play { min-width: 0; }
+}
+
+/* =====================================================
+   SEPTIEMBRE 2026 — REPARACIÓN DE MAQUETACIÓN Y CONTRASTE
+   ===================================================== */
+
+/* La barra conserva proporción editorial en monitores amplios y muestra una
+   identidad breve en móvil, aprovechando el espacio sin engordar el control. */
+@media (min-width: 1380px) {
+    .nav-container { max-width: 1420px; padding-inline: 0.9rem; }
+    .nav-menu { gap: 0.28rem; }
+    .nav-cluster > .nav-link { padding-inline: 0.82rem; }
+    .search-container { flex-basis: 180px; }
+}
+
+.dark-theme .header {
+    background: linear-gradient(180deg, rgba(29, 18, 38, 0.72), rgba(16, 11, 22, 0));
+}
+.dark-theme .nav-container {
+    border-color: #49385a;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(126, 80, 205, 0.18), transparent 42%),
+        rgba(27, 20, 34, 0.94);
+    box-shadow: 0 16px 44px rgba(7, 4, 10, 0.38), 0 0 0 1px rgba(185, 163, 255, 0.04);
+}
+
+/* El botón secundario de portada mantiene el estado solicitado. */
+.hero-buttons .btn-secondary {
+    border-color: rgba(255, 255, 255, 0.78);
+    background: transparent;
+    color: #fff;
+}
+.hero-buttons .btn-secondary:hover,
+.hero-buttons .btn-secondary:focus-visible {
+    border-color: #a98bea;
+    background: rgba(68, 42, 91, 0.72);
+    color: #f4ecff;
+    box-shadow: 0 10px 28px rgba(21, 11, 31, 0.28);
+}
+
+/* Encabezados e índices: una columna clara, sin márgenes negativos ni
+   superposición con el tiempo de lectura o el reproductor. */
+.section > .container > .section-title {
+    max-width: 22ch;
+    margin-inline: auto;
+    line-height: 1.02;
+    text-wrap: balance;
+}
+.section > .container > .section-subtitle,
+#contacto > .container > .section-title + p {
+    position: relative;
+    z-index: 1;
+    max-width: 72ch;
+    margin: 1.75rem auto 0;
+    line-height: 1.72;
+    text-wrap: pretty;
+}
+#contacto > .container > .section-title + p { color: #655b6d !important; }
+.dark-theme #contacto > .container > .section-title + p { color: #c4bac9 !important; opacity: 1; }
+.section-index {
+    width: min(100%, 1040px);
+    margin: 1.4rem auto 1rem;
+    padding: 1rem 1.15rem;
+}
+.section-index summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #49355e;
+}
+.section-index summary::after {
+    content: '+';
+    color: #7651d6;
+    font-size: 1.15rem;
+}
+.section-index[open] summary::after { content: '−'; }
+.section-index nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid #d8cde5;
+}
+.section-index a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.72rem 0.8rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    line-height: 1.42;
+}
+.section-index a:hover,
+.section-index a:focus-visible { background: #fff; color: #5b32bd; }
+.dark-theme .section-index summary { color: #eadff3; }
+.dark-theme .section-index nav { border-top-color: #3a2e45; }
+.dark-theme .section-index a { background: #211a27; color: #d9cfe1; }
+.dark-theme .section-index a:hover,
+.dark-theme .section-index a:focus-visible { background: #2a2033; color: #fff; }
+.timeline-player[hidden] { display: none !important; }
+
+/* América Latina: cada país y el contexto regional son superficies opacas
+   consistentes, también en modo nocturno. */
+.latam-intro {
+    border: 1px solid #d8dff2;
+    border-left: 4px solid #7651d6;
+    background: #f2eff7;
+    color: #292131;
+    box-shadow: none;
+}
+.latam-intro h3 { color: #45296d; }
+.latam-intro p { color: #514959; }
+.latam-grid { align-items: stretch; }
+.latam-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #ddd5e5;
+    border-top: 4px solid #7651d6;
+    background: #fff;
+}
+.latam-card h4 { color: #39234f; }
+.latam-highlight {
+    display: block;
+    width: 100%;
+    min-height: 3.35rem;
+    background: #eee8f6;
+    color: #57378a;
+    line-height: 1.45;
+}
+.latam-card ul { flex: 1; }
+.latam-card ul li { color: #514959; border-bottom-color: #ece6f0; }
+.dark-theme .latam-intro {
+    border-color: #443550;
+    border-left-color: #9c79e4;
+    background: #18131d;
+    color: #eee8f2;
+}
+.dark-theme .latam-intro h3 { color: #f1e8f7; }
+.dark-theme .latam-intro p { color: #c8bdcf; opacity: 1; }
+.dark-theme .latam-card { border-color: #3a2f43; border-top-color: #9c79e4; background: #18131d; }
+.dark-theme .latam-card h4 { color: #f4eef7; }
+.dark-theme .latam-highlight { background: #251c2e; color: #dbc8f4; }
+.dark-theme .latam-card ul li { color: #c8bdcf; border-bottom-color: #372d40; }
+
+/* Diagramas y recursos: más espacio útil, enlaces resistentes a textos largos
+   y colores estables en hover. */
+.disorder-network { overflow: hidden; }
+.disorder-network-svg-wrap {
+    width: min(100%, 900px);
+    max-width: none;
+    padding: 0.8rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+}
+.disorder-network-svg-wrap svg { min-width: 620px; }
+.resource-category { padding-top: 0.5rem; }
+.resource-category > h3 {
+    color: #4d3566 !important;
+    line-height: 1.3;
+}
+.resource-grid { align-items: stretch; }
+.resource-card-link { min-width: 0; height: 100%; }
+.resource-card-item {
+    min-width: 0;
+    min-height: 96px;
+    border-color: #ded5e7;
+    background: #fff;
+}
+.resource-card-item > div { min-width: 0; }
+.resource-card-item strong,
+.resource-card-item span {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+.resource-card-link:hover .resource-card-item,
+.resource-card-link:focus-visible .resource-card-item {
+    border-color: #8f6bd5;
+    background: #f7f3fa;
+    box-shadow: 0 8px 24px rgba(73, 47, 94, 0.11);
+}
+.dark-theme .resource-category > h3 { color: #d8c3f1 !important; }
+.dark-theme .resource-card-item {
+    border-color: #392e43;
+    background: #18131d;
+}
+.dark-theme .resource-card-item strong { color: #f1ebf5; }
+.dark-theme .resource-card-item span { color: #bdb2c5; }
+.dark-theme .resource-card-link:hover .resource-card-item,
+.dark-theme .resource-card-link:focus-visible .resource-card-item {
+    border-color: #8f6bd5;
+    background: #241b2c;
+}
+
+/* El miniquiz conserva su propósito educativo y usa una jerarquía más clara. */
+.psychology-quiz {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    border: 1px solid #ded5e7;
+    border-radius: 18px;
+    background: #faf8fb;
+}
+.quiz-question h4 { max-width: 34ch; margin-inline: auto; line-height: 1.35; }
+.quiz-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.quiz-option {
+    min-height: 56px;
+    border-color: #d9cfe2;
+    background: #fff;
+    line-height: 1.4;
+}
+.quiz-option:hover:not(.disabled),
+.quiz-option:focus-visible:not(.disabled) { border-color: #8f6bd5; background: #f2ecf7; }
+.quiz-stats { gap: 0.75rem; background: #eee8f5; }
+.quiz-stats > span { flex: 1 1 150px; text-align: center; }
+.dark-theme .psychology-quiz,
+.dark-theme .quiz-result,
+.dark-theme .quiz-stats { border-color: #392e43; background: #17131b; color: #e9e1ef; }
+.dark-theme .quiz-question h4 { color: #f4eef7; }
+.dark-theme .quiz-option { border-color: #40334b; background: #211a27; color: #eee8f2; }
+.dark-theme .quiz-option:hover:not(.disabled),
+.dark-theme .quiz-option:focus-visible:not(.disabled) { border-color: #9c79e4; background: #2a2033; }
+
+@media (max-width: 980px) {
+    .brand-copy { display: grid; }
+    .brand-copy small { display: none; }
+    .brand-copy strong { font-size: 0.82rem; }
+    .nav-logo { gap: 0.5rem; }
+}
+
+@media (max-width: 720px) {
+    .section { padding-block: 4rem; }
+    .section-index nav { grid-template-columns: 1fr; }
+    .section-index { margin-top: 1.2rem; }
+    .timeline-player { margin: 1.3rem 0 2rem; }
+    .timeline-player-copy strong { max-width: calc(100vw - 4rem); }
+    .latam-grid { grid-template-columns: 1fr; }
+    .latam-intro, .latam-card, .latam-challenges, .disorder-network, .therapeutic-route { padding: 1.15rem; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .disorder-network-svg-wrap {
+        margin-inline: -0.5rem;
+        padding: 0.5rem;
+        scroll-padding-inline: 0.5rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .brand-copy strong { font-size: 0.76rem; }
+    .nav-actions { gap: 0.25rem; }
+    .nav-actions .lang-toggle { min-width: 36px; }
+    .section > .container > .section-title { font-size: clamp(2rem, 11vw, 2.8rem); }
+    .section > .container > .section-subtitle,
+    #contacto > .container > .section-title + p { font-size: 0.95rem !important; }
+    .resource-card-item { min-height: 0; padding: 0.9rem; }
 }
