@@ -752,43 +752,40 @@ function initializeMoodTracker() {
 // Psychology quiz functionality
 // =============================================
 function initializePsychologyQuiz() {
-    const quizQuestions = [
-        {
-            question: "¿Quién es considerado el padre del psicoanálisis?",
-            options: ["Sigmund Freud", "Carl Jung", "B.F. Skinner", "Jean Piaget"],
-            correct: 0,
-            explanation: "Sigmund Freud desarrolló la teoría psicoanalítica y es considerado el fundador del psicoanálisis."
-        },
-        {
-            question: "¿Qué estudia la neuropsicología?",
-            options: ["Solo el comportamiento", "Solo el cerebro", "La relación entre cerebro y comportamiento", "Solo las emociones"],
-            correct: 2,
-            explanation: "La neuropsicología estudia específicamente cómo las funciones cerebrales se relacionan con el comportamiento."
-        },
-        {
-            question: "¿Cuál es la capacidad promedio de la memoria de trabajo según Miller (1956)?",
-            options: ["5±2 elementos", "7±2 elementos", "9±2 elementos", "11±2 elementos"],
-            correct: 1,
-            explanation: "La regla de Miller establece que la memoria de trabajo puede mantener 7±2 elementos simultáneamente. Investigaciones recientes sugieren 4±1 chunks verdaderos."
-        },
-        {
-            question: "¿Qué trastorno se caracteriza por la alternancia de episodios maníacos y depresivos?",
-            options: ["Depresión mayor", "Trastorno bipolar", "Esquizofrenia", "Trastorno de ansiedad generalizada"],
-            correct: 1,
-            explanation: "El trastorno bipolar se caracteriza por la alternancia entre episodios maníacos (euforia, grandiosidad) y episodios depresivos."
-        },
-        {
-            question: "¿Quién desarrolló la Teoría del Aprendizaje Social y el concepto de autoeficacia?",
-            options: ["Carl Rogers", "Abraham Maslow", "Albert Bandura", "Viktor Frankl"],
-            correct: 2,
-            explanation: "Albert Bandura desarrolló la teoría del aprendizaje social y el concepto de autoeficacia — la creencia en la propia capacidad para realizar tareas específicas."
-        }
-    ];
-    
+    const questionSets = {
+        es: [
+            { category: "Historia", question: "¿Qué hito ayudó a institucionalizar la psicología experimental en 1879?", options: ["El laboratorio de Wundt en Leipzig", "La publicación del DSM-5", "La teoría de Piaget", "El modelo de memoria de trabajo"], correct: 0, explanation: "El laboratorio de Wilhelm Wundt en Leipzig es un hito institucional importante, aunque la historia de la psicología no comienza con una sola fecha ni una sola persona." },
+            { category: "Métodos", question: "Dos variables cambian juntas en un estudio. ¿Qué puede afirmarse con seguridad?", options: ["Una causa la otra", "Existe una asociación que requiere más análisis", "El resultado se aplica a toda persona", "La hipótesis ya quedó demostrada"], correct: 1, explanation: "Una correlación muestra asociación. Para sostener causalidad hacen falta un diseño y controles adecuados, además de evidencia convergente." },
+            { category: "Cognición", question: "¿Qué diferencia mejor la memoria de trabajo de un almacenamiento pasivo a corto plazo?", options: ["Manipula activamente información", "No tiene límites", "Solo conserva imágenes", "Funciona sin atención"], correct: 0, explanation: "La memoria de trabajo mantiene y manipula información durante una tarea; su capacidad es limitada y depende de cómo se mida." },
+            { category: "Lectura clínica", question: "¿Cuál es la forma más responsable de leer una categoría del DSM-5-TR o la CIE-11?", options: ["Como una identidad completa", "Como una guía que sustituye la entrevista", "Como una clasificación que requiere evaluación y contexto", "Como un resultado permanente"], correct: 2, explanation: "Las clasificaciones organizan criterios y lenguaje profesional, pero no sustituyen la evaluación individual ni explican por sí solas a una persona." },
+            { category: "América Latina", question: "¿Qué buscó la psicología de la liberación asociada con Ignacio Martín-Baró?", options: ["Aplicar modelos sin considerar el contexto", "Vincular la psicología con realidades sociales y mayorías históricamente excluidas", "Reemplazar toda investigación cuantitativa", "Reducir la disciplina a la medicina"], correct: 1, explanation: "La psicología de la liberación cuestionó la aplicación acrítica de modelos y propuso una disciplina atenta a la historia, el poder y las necesidades sociales." },
+            { category: "Aprendizaje", question: "En el condicionamiento clásico, ¿qué ocurre durante la extinción?", options: ["La respuesta condicionada se debilita cuando deja de reforzarse la asociación", "El estímulo se vuelve permanente", "La memoria desaparece de inmediato", "Toda respuesta se generaliza"], correct: 0, explanation: "La respuesta condicionada disminuye cuando el estímulo condicionado deja de presentarse junto al estímulo incondicionado; esto no implica borrar instantáneamente el aprendizaje." },
+            { category: "Neuropsicología", question: "¿Qué estudia principalmente la neuropsicología?", options: ["Solo estructuras cerebrales", "Solo conducta observable", "Relaciones entre funciones cerebrales, cognición y conducta", "Únicamente emociones"], correct: 2, explanation: "La neuropsicología relaciona sistemas cerebrales con procesos cognitivos y conductuales mediante evaluación, observación e investigación." },
+            { category: "Evidencia", question: "Un estudio encuentra una diferencia promedio entre dos grupos. ¿Qué no permite concluir?", options: ["Que existe una tendencia en esa muestra", "Que cada integrante de un grupo tendrá esa característica", "Que conviene revisar el método", "Que otros estudios pueden comparar el resultado"], correct: 1, explanation: "Los promedios de grupo no predicen automáticamente a cada individuo; las distribuciones pueden solaparse y el contexto importa." },
+            { category: "Intervención", question: "¿Qué debería orientar una decisión de tratamiento psicológico?", options: ["Una lista encontrada en internet", "La intervención más famosa", "Evaluación profesional, evidencia, preferencias y contexto", "Un único síntoma aislado"], correct: 2, explanation: "Las decisiones responsables integran evaluación, evidencia aplicable, características de la persona, preferencias y recursos disponibles." },
+            { category: "Lectura crítica", question: "Una obra fue muy influyente históricamente. ¿Qué pregunta conviene hacer antes de usarla como evidencia actual?", options: ["¿Sigue siendo famosa?", "¿Tiene una portada reciente?", "¿Qué afirmaciones fueron revisadas, replicadas o cuestionadas después?", "¿Es la más citada en redes sociales?"], correct: 2, explanation: "La influencia histórica y el apoyo empírico actual no son equivalentes. Conviene distinguir el valor de una idea en su época de la evidencia disponible hoy." }
+        ],
+        en: [
+            { category: "History", question: "Which milestone helped institutionalize experimental psychology in 1879?", options: ["Wundt's laboratory in Leipzig", "Publication of DSM-5", "Piaget's theory", "The working-memory model"], correct: 0, explanation: "Wilhelm Wundt's Leipzig laboratory is an important institutional milestone, although psychology did not begin with one date or one person." },
+            { category: "Methods", question: "Two variables change together in a study. What can be stated with confidence?", options: ["One causes the other", "There is an association that requires further analysis", "The result applies to everyone", "The hypothesis has been proven"], correct: 1, explanation: "Correlation shows association. Causal claims require an appropriate design, adequate controls, and converging evidence." },
+            { category: "Cognition", question: "What best distinguishes working memory from passive short-term storage?", options: ["It actively manipulates information", "It has no limits", "It stores only images", "It works without attention"], correct: 0, explanation: "Working memory maintains and manipulates information during a task; its capacity is limited and depends on how it is measured." },
+            { category: "Clinical reading", question: "What is the most responsible way to read a DSM-5-TR or ICD-11 category?", options: ["As a complete identity", "As a guide that replaces an interview", "As a classification requiring assessment and context", "As a permanent result"], correct: 2, explanation: "Classifications organize criteria and professional language, but they do not replace individual assessment or fully explain a person." },
+            { category: "Latin America", question: "What did liberation psychology associated with Ignacio Martín-Baró seek to do?", options: ["Apply models without considering context", "Connect psychology with social realities and historically excluded majorities", "Replace all quantitative research", "Reduce the field to medicine"], correct: 1, explanation: "Liberation psychology questioned the uncritical application of imported models and emphasized history, power, and social needs." },
+            { category: "Learning", question: "What happens during extinction in classical conditioning?", options: ["The conditioned response weakens when the association is no longer reinforced", "The stimulus becomes permanent", "Memory disappears immediately", "Every response generalizes"], correct: 0, explanation: "The conditioned response decreases when the conditioned stimulus is no longer paired with the unconditioned stimulus; this does not mean learning is instantly erased." },
+            { category: "Neuropsychology", question: "What does neuropsychology primarily study?", options: ["Only brain structures", "Only observable behavior", "Relationships among brain function, cognition, and behavior", "Only emotions"], correct: 2, explanation: "Neuropsychology connects brain systems with cognitive and behavioral processes through assessment, observation, and research." },
+            { category: "Evidence", question: "A study finds an average difference between two groups. What does it not allow us to conclude?", options: ["There is a trend in that sample", "Every member of one group has that characteristic", "The method should be examined", "Other studies can compare the result"], correct: 1, explanation: "Group averages do not automatically predict individuals; distributions may overlap and context matters." },
+            { category: "Intervention", question: "What should guide a psychological treatment decision?", options: ["A list found online", "The most famous intervention", "Professional assessment, evidence, preferences, and context", "One isolated symptom"], correct: 2, explanation: "Responsible decisions integrate assessment, applicable evidence, the person's characteristics and preferences, and available resources." },
+            { category: "Critical reading", question: "A work was historically influential. What should be asked before using it as current evidence?", options: ["Is it still famous?", "Does it have a recent cover?", "Which claims were later reviewed, replicated, or challenged?", "Is it widely cited on social media?"], correct: 2, explanation: "Historical influence and current empirical support are not the same. A work's importance in its time should be distinguished from the evidence available today." }
+        ]
+    };
+
     let currentQuestionIndex = 0;
     let correctAnswers = 0;
+    let finished = false;
     
     const questionElement = document.getElementById('quiz-question-text');
+    const categoryElement = document.getElementById('quiz-category');
+    const progressElement = document.getElementById('quiz-progress-bar');
     const optionsContainer = document.querySelector('.quiz-options');
     const resultElement = document.querySelector('.quiz-result');
     const feedbackElement = document.querySelector('.result-feedback');
@@ -800,11 +797,22 @@ function initializePsychologyQuiz() {
     
     if (!questionElement) return;
     
-    if (totalElement) totalElement.textContent = quizQuestions.length;
+    const isEnglish = () => window.__lang === 'en' || document.documentElement.lang === 'en';
+    const questions = () => questionSets[isEnglish() ? 'en' : 'es'];
+    const labels = () => isEnglish()
+        ? { correct: 'Correct.', review: 'Review this answer.', next: 'Next question', results: 'See results', restart: 'Restart quiz', completed: 'Review complete', summary: 'You finished the ten-question review.', score: 'Final score', high: 'Strong review. Revisit the explanations to keep the distinctions clear.', middle: 'Good start. Review the explanations for the questions you missed.', low: 'Use the linked sections as a reading route, then try again.' }
+        : { correct: 'Correcto.', review: 'Revisa esta respuesta.', next: 'Siguiente pregunta', results: 'Ver resultados', restart: 'Reiniciar quiz', completed: 'Revisión completada', summary: 'Terminaste el repaso de diez preguntas.', score: 'Puntuación final', high: 'Repaso sólido. Vuelve a las explicaciones para mantener claras las distinciones.', middle: 'Buen inicio. Revisa las explicaciones de las preguntas que fallaste.', low: 'Usa las secciones enlazadas como ruta de lectura y vuelve a intentarlo.' };
+
+    if (totalElement) totalElement.textContent = questions().length;
     
     function loadQuestion() {
+        const quizQuestions = questions();
         const question = quizQuestions[currentQuestionIndex];
+        const copy = labels();
+        finished = false;
+        if (categoryElement) categoryElement.textContent = question.category;
         questionElement.textContent = question.question;
+        if (progressElement) progressElement.style.width = `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%`;
         
         optionsContainer.innerHTML = '';
         question.options.forEach((option, index) => {
@@ -817,10 +825,12 @@ function initializePsychologyQuiz() {
         
         if (resultElement) resultElement.style.display = 'none';
         if (currentElement) currentElement.textContent = currentQuestionIndex + 1;
+        if (nextButton) nextButton.textContent = currentQuestionIndex === quizQuestions.length - 1 ? copy.results : copy.next;
     }
     
     function selectAnswer(selectedIndex) {
-        const question = quizQuestions[currentQuestionIndex];
+        const question = questions()[currentQuestionIndex];
+        const copy = labels();
         const options = optionsContainer.querySelectorAll('.quiz-option');
         
         options.forEach((option, index) => {
@@ -835,13 +845,15 @@ function initializePsychologyQuiz() {
         if (selectedIndex === question.correct) {
             correctAnswers++;
             if (feedbackElement) {
-                feedbackElement.innerHTML = `<strong>¡Correcto!</strong><br>${question.explanation}`;
-                feedbackElement.style.color = '#51cf66';
+                feedbackElement.innerHTML = `<strong>${copy.correct}</strong><br>${question.explanation}`;
+                feedbackElement.removeAttribute('style');
+                feedbackElement.dataset.state = 'correct';
             }
         } else {
             if (feedbackElement) {
-                feedbackElement.innerHTML = `<strong>Incorrecto.</strong><br>${question.explanation}`;
-                feedbackElement.style.color = '#ff6b6b';
+                feedbackElement.innerHTML = `<strong>${copy.review}</strong><br>${question.explanation}`;
+                feedbackElement.removeAttribute('style');
+                feedbackElement.dataset.state = 'review';
             }
         }
         
@@ -851,58 +863,48 @@ function initializePsychologyQuiz() {
         if (resultElement) resultElement.style.display = 'block';
     }
     
-    if (nextButton) {
-        nextButton.addEventListener('click', function() {
+    nextButton?.addEventListener('click', function() {
+        if (finished) {
+            restartQuiz();
+        } else if (currentQuestionIndex < questions().length - 1) {
             currentQuestionIndex++;
-            
-            if (currentQuestionIndex < quizQuestions.length) {
-                loadQuestion();
-            } else {
-                showFinalResults();
-            }
-        });
-    }
+            loadQuestion();
+        } else {
+            showFinalResults();
+        }
+    });
     
     function showFinalResults() {
+        const quizQuestions = questions();
+        const copy = labels();
         const percentage = Math.round((correctAnswers / quizQuestions.length) * 100);
-        let message = '';
-        
-        if (percentage >= 80) {
-            message = '¡Excelente conocimiento en psicología!';
-        } else if (percentage >= 60) {
-            message = 'Buen conocimiento básico, ¡sigue explorando la plataforma!';
-        } else {
-            message = '¡Hay mucho por aprender! Te invitamos a explorar las secciones de Conceptos y Pioneros.';
-        }
+        const message = percentage >= 80 ? copy.high : percentage >= 60 ? copy.middle : copy.low;
+        finished = true;
+        if (categoryElement) categoryElement.textContent = copy.completed;
+        questionElement.textContent = copy.summary;
+        optionsContainer.innerHTML = '';
+        if (progressElement) progressElement.style.width = '100%';
         
         if (feedbackElement) {
-            feedbackElement.innerHTML = `<strong>Quiz Completado</strong><br>${message}<br><span class="i18n-inline">Puntuación final:</span> ${correctAnswers}/${quizQuestions.length} (${percentage}%)`;
+            feedbackElement.innerHTML = `<strong>${copy.completed}</strong><br>${message}<br>${copy.score}: ${correctAnswers}/${quizQuestions.length} (${percentage}%)`;
+            feedbackElement.dataset.state = 'summary';
         }
         if (nextButton) {
-            nextButton.textContent = 'Reiniciar Quiz';
-            nextButton.onclick = restartQuiz;
+            nextButton.textContent = copy.restart;
         }
+        if (resultElement) resultElement.style.display = 'block';
     }
     
     function restartQuiz() {
         currentQuestionIndex = 0;
         correctAnswers = 0;
+        finished = false;
         if (correctElement) correctElement.textContent = '0';
         if (percentageElement) percentageElement.textContent = '0%';
-        if (nextButton) {
-            nextButton.textContent = 'Siguiente Pregunta';
-            nextButton.onclick = function() {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < quizQuestions.length) {
-                    loadQuestion();
-                } else {
-                    showFinalResults();
-                }
-            };
-        }
         loadQuestion();
     }
-    
+
+    document.addEventListener('languagechange', restartQuiz);
     loadQuestion();
 }
 
@@ -1269,11 +1271,14 @@ function initializeTimelinePlayer() {
     const count = document.getElementById('timeline-count');
     const progress = document.getElementById('timeline-progress-bar');
     const player = document.querySelector('#historia .timeline-player');
+    const dismissButton = document.getElementById('timeline-dismiss');
+    const restoreButton = document.getElementById('timeline-restore');
     const historySection = document.getElementById('historia');
-    if (!items.length || !playButton || !previousButton || !nextButton || !now || !count || !progress || !player || !historySection) return;
+    if (!items.length || !playButton || !previousButton || !nextButton || !now || !count || !progress || !player || !dismissButton || !restoreButton || !historySection) return;
 
     let current = 0;
     let timer = null;
+    let dismissed = false;
     const translate = value => typeof window.t === 'function' ? window.t(value) : value;
 
     const render = (shouldScroll = false) => {
@@ -1318,11 +1323,33 @@ function initializeTimelinePlayer() {
     previousButton.addEventListener('click', () => { stop(); current = Math.max(0, current - 1); render(true); });
     nextButton.addEventListener('click', () => { stop(); current = Math.min(items.length - 1, current + 1); render(true); });
     items.forEach((item, index) => item.addEventListener('click', () => { stop(); current = index; render(false); }));
-    document.addEventListener('languagechange', () => { stop(); render(false); });
+    dismissButton.addEventListener('click', () => {
+        dismissed = true;
+        stop();
+        player.hidden = true;
+        restoreButton.hidden = false;
+    });
+    restoreButton.addEventListener('click', () => {
+        dismissed = false;
+        player.hidden = false;
+        restoreButton.hidden = true;
+        player.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    });
+    document.addEventListener('languagechange', () => {
+        stop();
+        render(false);
+        const hideLabel = translate('Ocultar recorrido');
+        const showLabel = translate('Mostrar recorrido');
+        dismissButton.setAttribute('aria-label', hideLabel);
+        dismissButton.setAttribute('title', hideLabel);
+        const restoreCopy = restoreButton.querySelector('span');
+        if (restoreCopy) restoreCopy.textContent = showLabel;
+    });
     document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
     new IntersectionObserver(entries => {
         const sectionIsVisible = entries[0].isIntersecting;
-        player.toggleAttribute('hidden', !sectionIsVisible);
+        player.toggleAttribute('hidden', !sectionIsVisible || dismissed);
+        restoreButton.toggleAttribute('hidden', !sectionIsVisible || !dismissed);
         if (!sectionIsVisible) stop();
     }, { threshold: 0.01 }).observe(historySection);
     render(false);
