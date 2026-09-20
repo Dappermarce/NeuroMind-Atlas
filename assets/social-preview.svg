@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">NeuroMind Atlas</title>
+  <desc id="description">Psicología, psiquiatría y neurociencia con evidencia, contexto y límites.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08060b"/>
+      <stop offset="0.56" stop-color="#130d19"/>
+      <stop offset="1" stop-color="#241332"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.34" r="0.52">
+      <stop offset="0" stop-color="#8d62e8" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#8d62e8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#cbb2f5" stroke-opacity="0.055"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="54" y="52" width="1092" height="526" rx="34" fill="none" stroke="#cbb2f5" stroke-opacity="0.18"/>
+  <g transform="translate(88 82)">
+    <rect width="64" height="64" rx="18" fill="#7b54d7"/>
+    <path d="M31 15c-7 0-12 5-12 11 0 2 .5 4 1.5 5.5C18 34 17 37 18 40c1 5 5 8 10 8h3V15Zm3 0c7 0 12 5 12 11 0 2-.5 4-1.5 5.5C47 34 48 37 47 40c-1 5-5 8-10 8h-3V15Z" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 24c3 0 5 2 6 5M23 38c3-1 6 0 8 3M39 24c-3 0-5 2-6 5M41 38c-3-1-6 0-8 3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+  <text x="174" y="113" fill="#f6f1fa" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700">NEUROMIND</text>
+  <text x="174" y="140" fill="#bdaecc" font-family="DejaVu Sans, sans-serif" font-size="16" letter-spacing="3">ATLAS DE LA MENTE</text>
+  <text x="88" y="255" fill="#f8f3fb" font-family="DejaVu Serif, serif" font-size="70" font-weight="700">Entender la mente</text>
+  <text x="88" y="332" fill="#d4bfff" font-family="DejaVu Serif, serif" font-size="70" font-weight="700">sin reducirla.</text>
+  <text x="92" y="397" fill="#c7bdcf" font-family="DejaVu Sans, sans-serif" font-size="22">Psicología · psiquiatría · neurociencia</text>
+  <text x="92" y="433" fill="#998ca5" font-family="DejaVu Sans, sans-serif" font-size="18">Evidencia visible. Contexto antes que etiquetas.</text>
+  <g transform="translate(858 176)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M135 4c-49 0-87 31-91 74-28 13-43 39-36 67 3 14 11 26 22 35-11 27-2 60 22 77 16 12 35 16 53 12 17 20 43 30 69 24 37-8 61-42 57-79 22-19 31-50 21-78-7-20-22-35-40-43C209 42 177 4 135 4Z" stroke="#d8c6ff" stroke-width="7" opacity="0.92"/>
+    <path d="M132 17v261M131 61c-22-20-52-17-68 4M131 104c-29-10-57 2-68 25M132 154c-35-5-59 15-65 43M134 58c21-21 48-17 66-2M134 107c31-13 60 0 71 26M134 159c33-5 58 15 63 42" stroke="#9d7bea" stroke-width="5" opacity="0.8"/>
+    <circle cx="132" cy="17" r="8" fill="#fff" stroke="none"/>
+    <circle cx="132" cy="278" r="8" fill="#fff" stroke="none"/>
+  </g>
+  <text x="92" y="536" fill="#a998b7" font-family="DejaVu Sans, sans-serif" font-size="16" letter-spacing="1.4">MARCELO C. K. · EDICIÓN 2026</text>
+</svg>
