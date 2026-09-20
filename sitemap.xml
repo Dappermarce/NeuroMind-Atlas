@@ -1,16 +1,9 @@
-cff-version: 1.2.0
-message: "Si utilizas NeuroMind Atlas en docencia o investigación, por favor cítalo."
-title: "NeuroMind Atlas: Psicología, psiquiatría y neurociencia"
-type: software
-authors:
-  - family-names: "C. K."
-    given-names: "Marcelo"
-date-released: 2026-09-19
-url: "https://neuromindatlas.vercel.app/"
-repository-code: "https://github.com/Dappermarce/NeuroMind-Atlas"
-abstract: "Atlas educativo bilingüe de psicología, psiquiatría, salud mental y neurociencia."
-keywords:
-  - psychology
-  - psychiatry
-  - mental health
-  - neuroscience
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://neuromindatlas.vercel.app/</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
