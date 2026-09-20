@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // A quiet set of margin notes for readers who keep exploring.
     let clickCount = 0;
     let noteTimer = null;
+    let activeNoteIndex = null;
     const logo = document.querySelector('.nav-logo');
     if (logo) {
         const messages = [
@@ -292,9 +293,19 @@ document.addEventListener('DOMContentLoaded', function() {
             "No toda conducta repetida requiere una explicación. Pero admitimos que esta resulta interesante."
         ];
 
-        const showMarginNote = (message) => {
+        const renderActiveMarginNote = () => {
+            const note = document.querySelector('.atlas-easter-note');
+            if (!note || activeNoteIndex === null) return;
+            const label = note.querySelector('span');
+            const copy = note.querySelector('p');
+            if (label) label.textContent = typeof t === 'function' ? t('Fuera del índice') : 'Fuera del índice';
+            if (copy) copy.textContent = typeof t === 'function' ? t(messages[activeNoteIndex]) : messages[activeNoteIndex];
+        };
+
+        const showMarginNote = (index) => {
             document.querySelector('.atlas-easter-note')?.remove();
             if (noteTimer) window.clearTimeout(noteTimer);
+            activeNoteIndex = index;
 
             const note = document.createElement('aside');
             note.className = 'atlas-easter-note';
@@ -302,18 +313,22 @@ document.addEventListener('DOMContentLoaded', function() {
             note.setAttribute('aria-live', 'polite');
 
             const label = document.createElement('span');
-            label.textContent = typeof t === 'function' ? t('Fuera del índice') : 'Fuera del índice';
             const copy = document.createElement('p');
-            copy.textContent = typeof t === 'function' ? t(message) : message;
             note.append(label, copy);
             document.body.appendChild(note);
+            renderActiveMarginNote();
             window.requestAnimationFrame(() => note.classList.add('is-visible'));
 
             noteTimer = window.setTimeout(() => {
                 note.classList.remove('is-visible');
-                window.setTimeout(() => note.remove(), 220);
+                window.setTimeout(() => {
+                    note.remove();
+                    activeNoteIndex = null;
+                }, 220);
             }, 5200);
         };
+
+        document.addEventListener('languagechange', renderActiveMarginNote);
 
         logo.addEventListener('click', function(event) {
             event.preventDefault();
@@ -325,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clickCount++;
             if (clickCount % 5 === 0) {
                 const index = clickCount / 5 - 1;
-                showMarginNote(messages[index]);
+                showMarginNote(index);
                 if (index === messages.length - 1) clickCount = 0;
             }
         });
@@ -1040,6 +1055,7 @@ function initializeSearch() {
 
     const searchContainer = document.createElement('div');
     searchContainer.className = 'search-container';
+    searchContainer.id = 'site-search';
     searchContainer.innerHTML = `
         <input type="text" id="search-input" placeholder="Buscar en el sitio..." aria-label="Buscar" />
         <div class="search-results" id="search-results"></div>
@@ -1049,6 +1065,40 @@ function initializeSearch() {
     
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
+    const searchToggle = document.getElementById('search-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+
+    const closeSearch = () => {
+        searchContainer.classList.remove('is-open');
+        searchToggle?.setAttribute('aria-expanded', 'false');
+        searchResults.style.display = 'none';
+    };
+
+    const syncSearchLanguage = () => {
+        const isEnglish = window.__lang === 'en' || document.documentElement.lang === 'en';
+        searchInput.placeholder = isEnglish ? 'Search the atlas...' : 'Buscar en el atlas...';
+        searchInput.setAttribute('aria-label', isEnglish ? 'Search the atlas' : 'Buscar en el atlas');
+        searchToggle?.setAttribute('aria-label', isEnglish ? 'Open search' : 'Abrir búsqueda');
+        searchToggle?.setAttribute('title', isEnglish ? 'Search' : 'Buscar');
+    };
+
+    searchToggle?.addEventListener('click', () => {
+        const willOpen = !searchContainer.classList.contains('is-open');
+        searchContainer.classList.toggle('is-open', willOpen);
+        searchToggle.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen) {
+            navMenu?.classList.remove('active');
+            navToggle?.setAttribute('aria-expanded', 'false');
+            window.setTimeout(() => searchInput.focus(), 0);
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    navToggle?.addEventListener('click', closeSearch);
+    document.addEventListener('languagechange', syncSearchLanguage);
+    syncSearchLanguage();
     
     const searchableContent = [
         { title: 'Historia de la Psicología', content: 'Wundt Leipzig Freud Watson conductismo humanista cognitiva Pavlov James', section: '#historia' },
@@ -1108,8 +1158,8 @@ function initializeSearch() {
     });
     
     document.addEventListener('click', function(e) {
-        if (!searchContainer.contains(e.target)) {
-            searchResults.style.display = 'none';
+        if (!searchContainer.contains(e.target) && !searchToggle?.contains(e.target)) {
+            closeSearch();
         }
     });
 }
