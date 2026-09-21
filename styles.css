@@ -2864,6 +2864,10 @@ img, svg, canvas {
         font-size: 0.6rem !important;
         border-radius: 14px !important;
     }
+    .timeline-item[data-year="1650–1800"]::before {
+        font-size: 0.52rem !important;
+        letter-spacing: -0.02em;
+    }
     .timeline-content { padding: 1.1rem; }
     .timeline-content h3 { font-size: 1.05rem; }
 
