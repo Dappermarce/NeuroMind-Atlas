@@ -1580,6 +1580,20 @@ window.TRANSLATIONS = {
   "Aportes: neuroimagen (fMRI, EEG), bases neuronales de la cognición.": "Contributions: neuroimaging (fMRI, EEG) and neural bases of cognition.",
   "Enfoque contemporáneo dominante, en diálogo constante con el cognitivismo.": "A major contemporary approach in constant dialogue with cognitive science.",
 
+  // Disorder network
+  "Red de trastornos: conexiones y comorbilidades": "Disorder network: connections and comorbidities",
+  "Los trastornos mentales raramente aparecen de forma aislada. Esta red muestra las comorbilidades más frecuentes. Un nodo central conectado a muchos otros indica alta comorbilidad.": "Mental disorders rarely appear in isolation. This network shows common comorbidities. A central node connected to many others indicates high comorbidity.",
+  "Red de comorbilidades de trastornos mentales": "Mental-disorder comorbidity network",
+  "Mayor": "Major",
+  "generalizada": "generalized",
+  "Trastorno": "Disorder",
+  "TOC": "OCD",
+  "TEPT": "PTSD",
+  "TLP": "BPD",
+  "Pánico": "Panic",
+  "Sustancias": "Substances",
+  "las líneas muestran asociaciones clínicas frecuentes de manera educativa; su grosor no expresa una estimación cuantitativa ni convierte a un diagnóstico en causa de otro.": "the lines present common clinical associations for educational purposes; their thickness does not represent a quantitative estimate or make one diagnosis the cause of another.",
+
   // Mood-history privacy controls
   "Solo la fecha y una puntuación del 1 al 5 se guardan en tu dispositivo.": "Only the date and a rating from 1 to 5 are stored on your device.",
   "Registra y visualiza tu estado emocional a lo largo del tiempo. Solo la fecha y una puntuación del 1 al 5 se guardan en tu dispositivo.": "Log and view your emotional state over time. Only the date and a rating from 1 to 5 are stored on your device.",
