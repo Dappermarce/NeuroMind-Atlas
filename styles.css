@@ -3736,6 +3736,7 @@ h1, h2, .hero-title, .section-title, .author-note h2,
 .nav-preview-intro img { position: absolute; right: -2.5rem; bottom: -3rem; width: 190px; opacity: 0.2; filter: grayscale(1) brightness(1.7) hue-rotate(220deg); }
 .nav-kicker { color: var(--atlas-lilac); font-size: 0.63rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
 .nav-illustration-icon { position: absolute; right: 1.2rem; bottom: 0.2rem; color: #9b7bec; font-size: 7.5rem; opacity: 0.16; transform: rotate(-8deg); }
+.nav-illustration-foundations { right: 1rem; bottom: 1rem; font-size: 6.4rem; opacity: 0.2; transform: rotate(-3deg); }
 .nav-preview-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; align-content: stretch; padding-left: 0.2rem; }
 .nav-preview-links a { display: flex; flex-direction: column; justify-content: flex-end; min-height: 105px; padding: 1rem; border: 1px solid #2b2531; border-radius: 16px; background: #161319; color: #f7f3fb; text-decoration: none; transition: background 160ms ease, border-color 160ms ease, transform 160ms ease; }
 .nav-preview-links a:hover,
