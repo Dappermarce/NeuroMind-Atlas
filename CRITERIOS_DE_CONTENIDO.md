@@ -27,6 +27,6 @@ El atlas explica ciencia con curiosidad, honestidad y lenguaje humano. Empieza p
 
 ## Revisión profesional y correcciones
 
-Este proyecto fue creado y desarrollado de manera independiente por Marcelo C. K. Su contenido contó con la revisión y las observaciones de psicólogos y psiquiatras. La selección de fuentes, la redacción y el mantenimiento del proyecto corresponden al autor.
+Este proyecto fue creado y desarrollado de manera independiente por Marcelo C. K. La selección de fuentes, la redacción y el mantenimiento corresponden al autor. Cualquier revisión externa que se publique deberá identificar a la persona revisora, sus credenciales, la fecha y el alcance; mientras eso no conste en el repositorio, el contenido no se presenta como revisado por pares ni avalado profesionalmente.
 
 Si una afirmación queda desactualizada, no cuenta con evidencia suficiente o puede explicarse con mayor claridad, se corrige o se retira.

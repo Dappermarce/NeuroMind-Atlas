@@ -680,15 +680,64 @@ function initializePersonalityTest() {
 // =============================================
 // Mood tracker functionality
 // =============================================
+const MOOD_STORAGE_KEY = 'moodData';
+
+function sanitizeMoodData(value) {
+    if (!Array.isArray(value)) return [];
+
+    return value.flatMap(entry => {
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return [];
+        if (typeof entry.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(entry.date)) return [];
+        const [year, month, day] = entry.date.split('-').map(Number);
+        const parsedDate = new Date(Date.UTC(year, month - 1, day));
+        if (parsedDate.getUTCFullYear() !== year || parsedDate.getUTCMonth() !== month - 1 || parsedDate.getUTCDate() !== day) return [];
+        if (typeof entry.mood !== 'number' || !Number.isInteger(entry.mood) || entry.mood < 1 || entry.mood > 5) return [];
+        return [{ date: entry.date, mood: entry.mood }];
+    });
+}
+
+function loadMoodData() {
+    try {
+        const raw = localStorage.getItem(MOOD_STORAGE_KEY);
+        if (raw === null) return [];
+        const sanitized = sanitizeMoodData(JSON.parse(raw));
+        const safeValue = JSON.stringify(sanitized);
+        if (safeValue !== raw) {
+            try {
+                localStorage.setItem(MOOD_STORAGE_KEY, safeValue);
+            } catch (_error) {
+                try { localStorage.removeItem(MOOD_STORAGE_KEY); } catch (_removeError) { /* Storage unavailable. */ }
+            }
+        }
+        return sanitized;
+    } catch (_error) {
+        try { localStorage.removeItem(MOOD_STORAGE_KEY); } catch (_removeError) { /* Storage unavailable. */ }
+        return [];
+    }
+}
+
+function saveMoodData(data) {
+    try {
+        localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(sanitizeMoodData(data)));
+        return true;
+    } catch (_error) {
+        return false;
+    }
+}
+
+function getMoodEmoji(mood) {
+    return ({ 1: '😢', 2: '🙁', 3: '😐', 4: '🙂', 5: '😊' })[mood] || '';
+}
+
 function initializeMoodTracker() {
     const moodButtons = document.querySelectorAll('.mood-btn');
     const saveMoodButton = document.querySelector('.save-mood');
-    const moodTextarea = document.querySelector('.mood-note textarea');
+    const clearMoodButton = document.querySelector('.clear-mood-history');
     const weeklyAvgElement = document.getElementById('weeklyAvg');
     const trendElement = document.getElementById('trend');
     
     let selectedMood = null;
-    let moodData = JSON.parse(localStorage.getItem('moodData')) || [];
+    let moodData = loadMoodData();
     
     updateMoodInsights();
     
@@ -696,11 +745,7 @@ function initializeMoodTracker() {
         button.addEventListener('click', function() {
             moodButtons.forEach(btn => btn.classList.remove('selected'));
             this.classList.add('selected');
-            selectedMood = {
-                value: parseInt(this.getAttribute('data-mood')),
-                label: this.getAttribute('data-label'),
-                emoji: this.textContent
-            };
+            selectedMood = parseInt(this.getAttribute('data-mood'));
         });
     });
     
@@ -713,30 +758,49 @@ function initializeMoodTracker() {
             
             const moodEntry = {
                 date: new Date().toISOString().split('T')[0],
-                mood: selectedMood.value,
-                label: selectedMood.label,
-                emoji: selectedMood.emoji,
-                note: moodTextarea ? moodTextarea.value : ''
+                mood: selectedMood
             };
             
             moodData = moodData.filter(entry => entry.date !== moodEntry.date);
             moodData.push(moodEntry);
             moodData = moodData.slice(-30);
             
-            localStorage.setItem('moodData', JSON.stringify(moodData));
+            if (!saveMoodData(moodData)) {
+                alert(typeof t === 'function' ? t('No se pudo guardar el historial en este dispositivo.') : 'No se pudo guardar el historial en este dispositivo.');
+                return;
+            }
             
             updateMoodInsights();
             initializeMoodChart(); // Redraw chart
             
             moodButtons.forEach(btn => btn.classList.remove('selected'));
-            if (moodTextarea) moodTextarea.value = '';
             selectedMood = null;
             
             alert(typeof t === 'function' ? t('Estado de ánimo guardado exitosamente ✓') : 'Estado de ánimo guardado exitosamente ✓');
         });
     }
+
+    if (clearMoodButton) {
+        clearMoodButton.addEventListener('click', function() {
+            const message = typeof t === 'function'
+                ? t('¿Borrar todo el historial de estado de ánimo guardado en este dispositivo?')
+                : '¿Borrar todo el historial de estado de ánimo guardado en este dispositivo?';
+            if (!window.confirm(message)) return;
+            try { localStorage.removeItem(MOOD_STORAGE_KEY); } catch (_error) { /* Storage unavailable. */ }
+            moodData = [];
+            updateMoodInsights();
+            initializeMoodChart();
+        });
+    }
+
+    document.addEventListener('languagechange', updateMoodInsights);
     
     function updateMoodInsights() {
+        if (weeklyAvgElement) weeklyAvgElement.textContent = '--';
+        if (trendElement) {
+            trendElement.textContent = '--';
+            trendElement.style.color = '';
+        }
         if (moodData.length === 0) return;
         
         const lastWeek = moodData.slice(-7);
@@ -750,13 +814,13 @@ function initializeMoodTracker() {
                 : recent;
             
             if (recent > older + 0.3) {
-                trendElement.textContent = '↗️ Mejorando';
+                trendElement.textContent = `↗️ ${typeof t === 'function' ? t('Mejorando') : 'Mejorando'}`;
                 trendElement.style.color = '#51cf66';
             } else if (recent < older - 0.3) {
-                trendElement.textContent = '↘️ Declinando';
+                trendElement.textContent = `↘️ ${typeof t === 'function' ? t('Declinando') : 'Declinando'}`;
                 trendElement.style.color = '#ff6b6b';
             } else {
-                trendElement.textContent = '→ Estable';
+                trendElement.textContent = `→ ${typeof t === 'function' ? t('Estable') : 'Estable'}`;
                 trendElement.style.color = '#339af0';
             }
         }
@@ -933,13 +997,13 @@ function initializeMoodChart() {
 
     const translate = (typeof t === 'function') ? t : (s) => s;
     const ctx = canvas.getContext('2d');
-    const moodData = JSON.parse(localStorage.getItem('moodData')) || [];
+    const moodData = loadMoodData();
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     if (moodData.length === 0) {
         ctx.fillStyle = '#999';
-        ctx.font = '14px Poppins, sans-serif';
+        ctx.font = '14px system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(translate('Registra tu estado de ánimo para ver el gráfico'), canvas.width / 2, canvas.height / 2);
         return;
@@ -1013,17 +1077,17 @@ function initializeMoodChart() {
         
         ctx.font = '14px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(point.emoji, x, y - 14);
+        ctx.fillText(getMoodEmoji(point.mood), x, y - 14);
         
         ctx.fillStyle = '#888';
-        ctx.font = '10px Poppins, sans-serif';
+        ctx.font = '10px system-ui, sans-serif';
         const shortDate = point.date.slice(5); // MM-DD
         ctx.fillText(shortDate, x, canvas.height - padding + 14);
     });
     
     // Y-axis labels
     ctx.fillStyle = '#888';
-    ctx.font = '10px Poppins, sans-serif';
+    ctx.font = '10px system-ui, sans-serif';
     ctx.textAlign = 'right';
     const moodLabels = ['Terrible', 'Mal', 'Normal', 'Bien', 'Excelente'];
     moodLabels.forEach((label, index) => {
@@ -1494,8 +1558,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             node.classList.add('is-active');
-            detailTitle.textContent = data.title;
-            detailList.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+            const translate = typeof t === 'function' ? t : value => value;
+            detailTitle.textContent = translate(data.title);
+            detailList.replaceChildren(...data.items.map(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = translate(item);
+                return listItem;
+            }));
             detailPanel.hidden = false;
             detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
@@ -1515,5 +1584,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (detailClose) {
             detailClose.addEventListener('click', closeDetail);
         }
+
+        document.addEventListener('languagechange', function() {
+            const activeNode = document.querySelector('.paradigm-node.is-active[data-detail]');
+            if (!activeNode) return;
+            const data = paradigmDetails[activeNode.getAttribute('data-detail')];
+            if (!data) return;
+            const translate = typeof t === 'function' ? t : value => value;
+            detailTitle.textContent = translate(data.title);
+            detailList.replaceChildren(...data.items.map(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = translate(item);
+                return listItem;
+            }));
+        });
     }
 });

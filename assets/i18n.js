@@ -6,7 +6,7 @@
 // =============================================
 (function () {
     var STORAGE_KEY = 'site-lang';
-    var ATTRS = ['placeholder', 'title', 'aria-label', 'alt'];
+    var ATTRS = ['placeholder', 'title', 'aria-label', 'alt', 'data-year'];
 
     function normalize(s) {
         return (s || '').replace(/\s+/g, ' ').trim();

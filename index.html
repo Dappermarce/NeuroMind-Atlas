@@ -30,8 +30,7 @@
     <meta name="twitter:image" content="https://neuromindatlas.vercel.app/assets/social-preview.png">
     <meta name="twitter:image:alt" content="NeuroMind Atlas — entender la mente sin reducirla">
     <link rel="stylesheet" href="styles.css?v=20260919-1">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+    <link href="assets/vendor/fontawesome/css/all.min.css" rel="stylesheet">
     <script>
       (function () {
         var saved = localStorage.getItem('theme');
@@ -2523,22 +2522,23 @@
                 <div class="interactive-module">
                     <div class="module-header">
                         <h3><i class="fas fa-heart"></i> Rastreador de Estado de Ánimo</h3>
-                        <p>Registra y visualiza tu estado emocional a lo largo del tiempo. Los datos se guardan solo en tu dispositivo.</p>
+                        <p>Registra y visualiza tu estado emocional a lo largo del tiempo. Solo la fecha y una puntuación del 1 al 5 se guardan en tu dispositivo.</p>
                     </div>
                     <div class="mood-tracker">
                         <div class="mood-input">
                             <h4>¿Cómo te sientes hoy?</h4>
                             <div class="mood-options">
-                                <button class="mood-btn" data-mood="5" data-label="Excelente">😊</button>
-                                <button class="mood-btn" data-mood="4" data-label="Bien">🙂</button>
-                                <button class="mood-btn" data-mood="3" data-label="Normal">😐</button>
-                                <button class="mood-btn" data-mood="2" data-label="Mal">🙁</button>
-                                <button class="mood-btn" data-mood="1" data-label="Terrible">😢</button>
+                                <button type="button" class="mood-btn" data-mood="5" aria-label="Excelente">😊</button>
+                                <button type="button" class="mood-btn" data-mood="4" aria-label="Bien">🙂</button>
+                                <button type="button" class="mood-btn" data-mood="3" aria-label="Normal">😐</button>
+                                <button type="button" class="mood-btn" data-mood="2" aria-label="Mal">🙁</button>
+                                <button type="button" class="mood-btn" data-mood="1" aria-label="Terrible">😢</button>
                             </div>
-                            <div class="mood-note">
-                                <textarea placeholder="Notas opcionales sobre tu estado de ánimo..."></textarea>
-                                <button class="btn btn-primary save-mood">Guardar Estado</button>
+                            <div class="mood-actions">
+                                <button type="button" class="btn btn-primary save-mood">Guardar Estado</button>
+                                <button type="button" class="btn clear-mood-history">Borrar historial local</button>
                             </div>
+                            <p class="mood-privacy">No se guardan notas ni texto libre. Puedes borrar el historial local cuando quieras.</p>
                         </div>
                         <div class="mood-chart">
                             <h4>Tu Historial de Estado de Ánimo</h4>
@@ -2759,7 +2759,7 @@
                 <div class="footer-section">
                     <h3>NeuroMind Atlas</h3>
                     <p>Un atlas para seguir la evidencia sin perder de vista a la persona.</p>
-                    <p style="margin-top:0.5rem;font-size:0.85rem;color:#95a5a6;">Proyecto independiente. Contenido revisado por psicólogos y psiquiatras.</p>
+                    <p style="margin-top:0.5rem;font-size:0.85rem;color:#95a5a6;">Proyecto educativo independiente. Consulta el estado de revisión y las correcciones en el repositorio.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Explorar</h3>

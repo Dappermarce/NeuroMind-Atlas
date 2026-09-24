@@ -26,9 +26,9 @@ Desarrollo local
 
 No requiere compilación. Abre `index.html` con un servidor local para conservar el comportamiento de recursos y enlaces.
 
-Autoría y revisión profesional
+Autoría y estado de revisión
 
-NeuroMind Atlas fue creado y desarrollado de manera independiente por Marcelo C. K. Su contenido contó con la revisión y las observaciones de psicólogos y psiquiatras.
+NeuroMind Atlas fue creado y desarrollado de manera independiente por Marcelo C. K. No se presenta como artículo revisado por pares, guía clínica ni revisión sistemática. El alcance de la verificación y las correcciones se documenta en `REVIEW_AND_CORRECTIONS.md`.
 
 Última revisión: septiembre de 2026.
 
@@ -37,5 +37,8 @@ Documentación del proyecto
 - `CITATION.cff`: información de autoría y citación del proyecto.
 - `CRITERIOS_DE_CONTENIDO.md`: jerarquía de fuentes, voz y límites de las afirmaciones.
 - `CONTRIBUTING.md`: procedimiento para proponer correcciones verificables.
+- `PRIVACY.md`: datos locales, servicios externos y límites de privacidad.
+- `SECURITY.md`: procedimiento responsable para comunicar vulnerabilidades.
+- `REVIEW_AND_CORRECTIONS.md`: estado académico, verificación y registro de correcciones.
 
 La voz del proyecto combina explicación científica, ejemplos cotidianos y una regla de trabajo sencilla: si algo no se sostiene, se corrige.
